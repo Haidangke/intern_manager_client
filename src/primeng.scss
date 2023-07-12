@@ -1,0 +1,40 @@
+.p-sidebar {
+    @apply p-0;
+}
+
+.p-dropdown,
+.p-calendar {
+    @apply w-full;
+}
+
+//Breadcrumb
+
+.p-breadcrumb {
+    @apply bg-transparent border-0 pl-0;
+}
+
+.p-menuitem-text {
+    @apply text-sm capitalize;
+}
+
+.p-icon {
+    @apply w-3 h-3;
+}
+
+.ng-star-inserted > th,
+.ng-star-inserted > td {
+    @apply text-sm;
+}
+
+//Input
+.p-password {
+    @apply w-full;
+    & > input {
+        @apply w-full h-11;
+    }
+}
+
+//Button
+.p-button {
+    @apply w-full;
+}

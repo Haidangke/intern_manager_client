@@ -1,0 +1,24 @@
+<div class="flex mb-8 gap-6">
+    <div class="flex-1 bg-light shadow px-4 pt-4 pb-6 rounded">
+        <h2 class="text-xl">
+            Team
+        </h2>
+        <div class="flex items-center justify-center">
+            <p-chart type="pie" [data]="data" [options]="options"></p-chart>
+        </div>
+    </div>
+
+    <div class="flex-1 bg-light shadow px-4 py-3 rounded">
+        <h2 class="text-xl">
+            Intern
+        </h2>
+        <div class="p-2"><p-chart type="bar" [data]="data2" [options]="options2"></p-chart></div>
+    </div>
+</div>
+
+<app-intern-latest></app-intern-latest>
+
+<div class="bg-white shadow p-4">
+    <h2 class="text-xl">Intern Join</h2>
+    <p-chart type="line" [data]="data3" [options]="options3"></p-chart>
+</div>

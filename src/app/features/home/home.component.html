@@ -1,0 +1,25 @@
+<div class="flex items-center box-border mb-4 gap-6">
+    <div class="shadow hover:shadow-md transition group bg-light rounded box-border p-4 flex-1"
+        *ngFor="let column of columns">
+        <div class="flex justify-between">
+            <div class="text flex flex-col gap-2">
+                <h6 class="font-medium text-[#9e9e9e]">{{column.title}}</h6>
+                <h3 class="text-black text-lg font-medium">{{column.count}}</h3>
+                <p class="text-sm text-[#9e9e9e]">
+                    <span class="text-green-500">{{column.new}} new</span> since last visit
+                </p>
+            </div>
+
+            <div class="hidden cursor-pointer transition text-xs group-hover:flex text-[#9e9e9e] ">
+                <span class="underline">Go to {{column.title}}</span>
+                <i class="pi pi-angle-right"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CHARTS -->
+
+<app-charts></app-charts>
+
+<app-intern-latest></app-intern-latest>

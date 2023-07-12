@@ -1,0 +1,10 @@
+<app-list-data (onUpdate)="handleUpdateIntern($event)" (onAdd)="isAddDialog = true" [data]="internList"
+    [fetching]="isFetching" [deleting]="isDeleting" [cols]="cols" title="Intern" [pagination]="pagination"
+    [actions]="['update', 'delete']" [totalRecords]="totalRecords"></app-list-data>
+
+<p-dialog [draggable]="false" [resizable]="false" header="Add Intern" [style]="{'width': '70vw'}"
+    [(visible)]="isAddDialog">
+    <app-intern-form (onSubmitSuccess)="handleAddInternSuccess($event)" [isDialog]="true"></app-intern-form>
+</p-dialog>
+
+<p-toast></p-toast>

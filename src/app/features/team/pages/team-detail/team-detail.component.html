@@ -1,0 +1,27 @@
+<div class="flex gap-4">
+    <div *ngIf="team" class="w-1/4 bg-light rounded shadow p-6">
+        <h3 class="text-lg font-medium">Team Info</h3>
+        <div class="mt-4">
+            <div class="mb-2">
+                <div class="text-sm font-medium">Name</div>
+                <div class="text-sm text-gray-500">{{team.name}}</div>
+            </div>
+            <div class="mb-2">
+                <div class="text-sm font-medium">Interns</div>
+                <div class="text-sm text-gray-500">{{team.totalIntern}}</div>
+            </div>
+            <div class="mb-2">
+                <div class="text-sm font-medium">Mentor</div>
+                <a class="text-sm text-blue-500 underline" [routerLink]="['/mentors', team.mentor.id ]">
+                    <div>
+                        {{team.mentor.name}}
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <div class="w-3/4 bg-light rounded shadow px-4 py-6">
+
+    </div>
+</div>

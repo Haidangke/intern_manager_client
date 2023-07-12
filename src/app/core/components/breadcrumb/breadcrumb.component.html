@@ -1,0 +1,6 @@
+<p-breadcrumb *ngIf="isDisplay;else noDisplay" class="max-w-full" [model]="items" [home]="home"></p-breadcrumb>
+
+<ng-template #noDisplay>
+    <div class="h-6"></div>
+</ng-template>
+

@@ -1,0 +1,26 @@
+<p-sidebar [(visible)]="display" (onHide)="onDisplay.emit(false)">
+    <ng-template pTemplate="header">MENU</ng-template>
+    <ul class="select-none">
+        <li class="tab-item" *ngFor="let tab of sidebarTabs"
+            [ngClass]="{ active: parentTabSelected === tab.id, 'show-child': (showChild && parentTabClicked === tab.id)}">
+            <span class="parent-item" (click)="onClickParentTab(tab.id)">
+                <span class="w-8">
+                    <fa-icon [icon]="tab.icon" />
+                </span>
+
+                <span class="grow">{{tab.name}}</span>
+
+                <span class="chevron-right-icon">
+                    <fa-icon [icon]="faChevronRightIcon"></fa-icon>
+                </span>
+            </span>
+
+            <ul class="child-list">
+                <li class="child-item" [routerLink]="children.link"
+                    [ngClass]="{ active: childTabSelected === children.id && parentTabSelected === tab.id}"
+                    class="child-item" *ngFor="let children of tab.children"
+                    (click)="onClickChildTab(tab.id, children.id)">{{children.name}}</li>
+            </ul>
+        </li>
+    </ul>
+</p-sidebar>

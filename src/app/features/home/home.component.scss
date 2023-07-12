@@ -1,0 +1,36 @@
+table {
+  thead{
+    tr {
+      @apply border-b border-solid border-secondary;
+
+      th,
+      td {
+        @apply px-[16px] py-[20px] text-left min-w-[80px];
+      }
+
+      th:nth-of-type(1),
+      td:nth-of-type(1) {
+        @apply pl-[24px] pr-[8px];
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      @apply border-b border-solid border-secondary;
+
+      th,
+      td {
+        @apply px-[16px] py-[12px] text-left min-w-[80px];
+      }
+
+      th:nth-of-type(1),
+      td:nth-of-type(1) {
+        @apply pl-[24px] pr-[8px];
+      }
+    }
+    // tr:nth-last-child(1) {
+    //   @apply border-none;
+    // }
+  }
+}

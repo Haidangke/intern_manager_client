@@ -1,0 +1,15 @@
+<form [formGroup]="teamForm" (submit)="handleSubmit()" class="pb-2 flex flex-col gap-4">
+    <div class="flex flex-col gap-2">
+        <label for="name">Name</label>
+        <input formControlName="name" placeholder="name" id="name" type="text" pInputText>
+    </div>
+
+    <div class="flex flex-col gap-2">
+        <label for="mentor">Mentor</label>
+        <p-dropdown formControlName="mentor" id="mentor" placeholder="mentor" [options]="listMentor" optionValue="id" optionLabel="name"
+            appendTo="body"></p-dropdown>
+    </div>
+    <div class="w-full flex justify-end mt-4">
+        <p-button [loading]="isLoading" type="submit" label="Submit" [disabled]="!teamForm.valid"></p-button>
+    </div>
+</form>

@@ -1,0 +1,112 @@
+<ng-container>
+    <app-loading-spinner *ngIf="deleting" />
+
+    <!-- Header Section -->
+    <div class="rounded-t bg-light shadow">
+        <p-table [showLoader]="false" [loading]="fetching" [columns]="cols" [value]="data"
+            [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template *ngIf="isCaption" pTemplate="caption">
+                <h4 class="text-lg font-medium mb-4">{{title}} Management</h4>
+                <!-- Search box -->
+                <div class="flex justify-between">
+                    <div class="relative w-full md:w-[18.75rem]">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input (input)="onSearch.emit($event)" type="text" pInputText
+                                placeholder="Search {{title}}" />
+                        </span>
+
+                    </div>
+                    <p-button (onClick)="onAdd.emit()" label="Add {{title}}"></p-button>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+                <tr class="capitalize">
+                    <th>#</th>
+                    <th *ngFor="let col of columns">
+                        {{ col.header || col.field }}
+                    </th>
+                    <th *ngIf="actions.length > 0">
+                        actions
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage" let-columns let-index>
+                <tr>
+
+                    <td [attr.colspan]="recordsColSpan">
+                        <div class="flex flex-col items-center gap-3">
+                            <i [style]="{'font-size': '20px'}" class="pi pi-inbox"></i>
+                            <span>No records found</span>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="loadingbody" let-columns>
+                <tr>
+                    <td><p-skeleton></p-skeleton></td>
+                    <td *ngFor="let column of columns"><p-skeleton></p-skeleton></td>
+                    <td *ngIf="actions.length > 0"><p-skeleton></p-skeleton></td>
+                </tr>
+            </ng-template>
+
+            <ng-template let-rowIndex="rowIndex" pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td> {{rowIndex + 1}}</td>
+                    <td [ngSwitch]="col.type" *ngFor="let col of columns">
+                        <!-- link -->
+                        <a *ngSwitchCase="'link'" class="text-blue-500 hover:underline"
+                            routerLink="/{{col.url[0]}}/{{rowData[col.url[1]]}}">{{
+                            rowData[col.field]
+                            }}</a>
+
+                        <!-- child -->
+                        <a *ngSwitchCase="'child'" class="text-blue-500 hover:underline"
+                            routerLink="/{{col.child.url[0]}}/{{rowData[col.field][col.child.url[1]]}}">{{
+                            rowData[col.field][col.child.field] }}</a>
+
+                        <!-- date -->
+                        <ng-container *ngSwitchCase="'date'">
+                            {{rowData[col.field] | date: 'dd/MM/yyyy'}}
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="'status'">
+                            <span
+                                [ngClass]="{'bg-green-600': rowData[col.field] ==='internship', 'bg-yellow-500': rowData[col.field] ==='candidate'}"
+                                class="text-xs text-white py-[3px] px-2 rounded font-medium">
+                                {{ rowData[col.field] }}
+                            </span>
+                        </ng-container>
+
+                        <!-- default -->
+                        <ng-container *ngSwitchDefault>{{ rowData[col.field] }}</ng-container>
+                    </td>
+                    <td *ngIf="actions.length > 0">
+                        <div class="flex items-center gap-3">
+                            <button *ngIf="actions.includes('update')" class="rounded-full btn icon secondary sm"
+                                (click)="onUpdate.emit(rowData)">
+                                <i class="pi pi-pencil"></i>
+                            </button>
+                            <button *ngIf="actions.includes('delete')" class="rounded-full btn icon secondary sm"
+                                (click)="onDelete.emit(rowData)">
+                                <i class="pi pi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <div *ngIf="pagination" class="bg-light flex items-center justify-end">
+            <span class="mx-2 text-sm text-[#6c757d] text-start">Items per page: </span>
+            <p-dropdown [(ngModel)]="rows" (onChange)="onSizeChange.emit($event)" [options]="[5, 10, 20]"></p-dropdown>
+            <p-paginator (onPageChange)="handlePageChange($event)" [first]="first" [rows]="rows"
+                [totalRecords]="totalRecords" [showCurrentPageReport]="true"
+                currentPageReportTemplate="{first} - {last} of {totalRecords}" [showPageLinks]="false"
+                [showFirstLastIcon]="false"></p-paginator>
+        </div>
+    </div>
+</ng-container>

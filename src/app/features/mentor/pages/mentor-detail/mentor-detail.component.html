@@ -1,0 +1,44 @@
+<div class="bg-light rounded-lg mb-2 border">
+    <!-- Heading Info -->
+    <div *ngIf="!isFetching; else skeleton;"
+        class="flex flex-col md:flex-row items-center justify-between p-3 gap-2 md:gap-[7rem]"
+        style="background-image: url('../assets/images/bg-intern.png')">
+        <!-- Avatar -->
+        <div *ngIf="mentor" class="flex items-center gap-4 w-full md:w-auto">
+            <div class="p-2 rounded-full bg-white">
+                <img src="../assets/images/avt.jpg" alt="" class="w-20 h-20  rounded-full" />
+            </div>
+            <div>
+                <p class="text-xl text-dark font-medium">{{ mentor.name }}</p>
+                <p class="text-sm text-sidebar font-normal">
+                    <span class="capitalize">{{mentor.gender}}</span>
+                    <span class="mx-2">•</span>
+                    <span class="capitalize">{{mentor.email}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-4">
+        <app-tab-menu [items]="items" [activeItem]="activeItem" (onActiveChange)="activeItem = $event"></app-tab-menu>
+    </div>
+</div>
+
+<ng-container *ngIf="mentor">
+    <app-mentor-info *ngIf="activeItem.id==='info'" [mentor]="mentor"></app-mentor-info>
+    <!-- Form -->
+    <app-mentor-form *ngIf="activeItem.id === 'edit'" [mentor]="mentor"></app-mentor-form>
+</ng-container>
+
+
+
+
+<ng-template #skeleton>
+    <div class="flex items-center p-3 gap-4" style="background-image: url('../assets/images/bg-intern.png')">
+        <p-skeleton shape="circle" size="6rem"></p-skeleton>
+        <div>
+            <p-skeleton height="1.5rem" width="8rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="1rem" width="5rem" styleClass="mb-2"></p-skeleton>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,58 @@
+<form [formGroup]="mentorForm" (ngSubmit)="handleSubmit()">
+    <div class="flex gap-4">
+        <div [ngClass]="{'p-0': isDialog, 'px-4 py-6': !isDialog}" class="flex-1 bg-light rounded-md border-1">
+            <h3 class="text-lg mb-4 font-medium">Basic Information</h3>
+            <div class="flex flex-col gap-4">
+                <!-- Name -->
+                <div class="flex flex-col gap-2 ">
+                    <label class="text-sm text-gray-500 font-medium" htmlFor="username">Full Name</label>
+                    <input placeholder="Full name" pInputText id="username" formControlName="name" />
+                </div>
+
+                <!-- Birthday -->
+                <div class="flex flex-col gap-2 col-start-2 col-end-3">
+                    <label class="text-sm text-gray-500 font-medium" htmlFor="birthday">Birthday</label>
+                    <p-calendar placeholder="Birthday" appendTo="body" id="birthday"
+                        formControlName="birthday"></p-calendar>
+                </div>
+
+                <!-- Gender -->
+                <div class="flex flex-col gap-2 col-start-1 col-end-2">
+                    <label class="text-sm text-gray-500 font-medium" htmlFor="gender">Gender</label>
+                    <p-dropdown placeholder="Gender" optionLabel="title" optionValue="value" formControlName="gender"
+                        [options]="genders">
+                    </p-dropdown>
+                </div>
+
+            </div>
+        </div>
+        <div [ngClass]="{'p-0': isDialog, 'px-4 py-6': !isDialog}"
+            class="flex-1 bg-light px-4 py-6 rounded-md border-1">
+            <h3 class="text-lg mb-4 font-medium">Contact Information</h3>
+            <div class="flex-1 flex flex-col gap-4">
+                <!-- Email -->
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm text-gray-500 font-medium" htmlFor="email">Email</label>
+                    <input placeholder="Email" pInputText id="email" aria-describedby="username-help"
+                        formControlName="email" />
+                </div>
+
+                <!-- Phone number -->
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm text-gray-500 font-medium" htmlFor="phone">Phone Number</label>
+                    <input placeholder="Phone number" pInputText id="phone" aria-describedby="phone-help"
+                        formControlName="phone" />
+                </div>
+
+                <!-- Address -->
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm text-gray-500 font-medium" htmlFor="address">Address</label>
+                    <input placeholder="Address" pInputText id="address" formControlName="address" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-full flex justify-end mt-4">
+        <p-button type="submit" label="Submit" [disabled]="!mentorForm.valid"></p-button>
+    </div>
+</form>

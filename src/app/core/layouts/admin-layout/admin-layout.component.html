@@ -1,0 +1,16 @@
+<app-header (onDisplay)="displaySidebar = true" />
+
+
+<app-sidebar [display]="displaySidebar" (onDisplay)="displaySidebar = false" />
+
+
+<div class="main">
+    <div class="main-content">
+        <div class="wrapper">
+            <app-breadcrumb></app-breadcrumb>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+<p-toast></p-toast>

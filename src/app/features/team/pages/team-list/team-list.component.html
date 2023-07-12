@@ -1,0 +1,10 @@
+<app-list-data (onUpdate)="handleUpdateTeam($event)" (onAdd)="isAddDialog = true" [data]="listTeam" title="Team"
+    [fetching]="isLoading" [deleting]="isDeleting" [cols]="cols" (onDelete)="handleDeleteTeam($event)"
+    [pagination]="pageInfo" [actions]="['update', 'delete']">
+</app-list-data>
+
+<p-dialog [resizable]="false" [draggable]="false" header="Add Team" [(visible)]="isAddDialog" [style]="{width: '50%'}">
+    <app-team-form></app-team-form>
+</p-dialog>
+
+<p-toast></p-toast>

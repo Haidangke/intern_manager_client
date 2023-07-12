@@ -1,0 +1,8 @@
+<ul class="flex py-3 gap-2 items-center">
+    <li *ngFor="let item of items" (click)="onActiveChange.emit(item)"
+        [class]="{'bg-blue-500': item.id === activeItem.id, 'text-white': item.id === activeItem.id}"
+        class="flex items-center px-6 py-2 rounded text-gray-500 cursor-pointer">
+        <i [class]="item.icon"></i>
+        <span class="text-sm font-medium ml-2">{{item.label}}</span>
+    </li>
+</ul>

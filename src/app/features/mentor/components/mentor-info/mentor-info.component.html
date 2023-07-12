@@ -1,0 +1,42 @@
+<div class="flex flex-wrap md:flex-nowrap gap-6">
+    <div
+        class="sticky top-[70px] bg-light w-full md:w-1/4 h-fit border-1 border-solid border-secondary rounded-lg p-6 first">
+        <h3 class="font-medium text-lg">Mentor Info</h3>
+        <ng-container [ngTemplateOutlet]="item"
+            [ngTemplateOutletContext]="{value: mentor.name, key: 'Name'}"></ng-container>
+
+        <ng-container [ngTemplateOutlet]="item"
+            [ngTemplateOutletContext]="{value: mentor.gender, key: 'Gender'}"></ng-container>
+
+        <ng-container [ngTemplateOutlet]="item"
+            [ngTemplateOutletContext]="{value: mentor.phone, key: 'Phone'}"></ng-container>
+
+        <ng-container [ngTemplateOutlet]="item"
+            [ngTemplateOutletContext]="{value: mentor.email, key: 'Email'}"></ng-container>
+
+        <ng-container [ngTemplateOutlet]="item"
+            [ngTemplateOutletContext]="{value: mentor.address, key: 'Address'}"></ng-container>
+
+        <ng-container [ngTemplateOutlet]="item"
+            [ngTemplateOutletContext]="{value: mentor.birthday,key: 'Birthday', type: 'date'}"></ng-container>
+
+    </div>
+
+
+    <!-- Right -->
+    <div class="bg-light w-full md:w-3/4 border-1 border-solid border-secondary rounded-lg ">
+        <p-tabMenu [model]="subTabs" [activeItem]="activeSubTab"></p-tabMenu>
+        <app-list-data [pagination]="pagination" [data]="internList" [cols]="cols" [fetching]="internFetching"
+            [isCaption]="false"></app-list-data>
+    </div>
+</div>
+
+<ng-template #item let-key="key" let-value="value" let-type="type">
+    <div class="flex flex-col mt-4">
+        <p class="text-dark font-medium text-sm leading-5">{{key}}</p>
+        <p *ngIf="type === undefined" class="text-sidebar text-sm mt-1">{{value}}</p>
+        <p *ngIf="type === 'date'" class="text-sidebar text-sm mt-1">{{value | date}}</p>
+    </div>
+
+
+</ng-template>
