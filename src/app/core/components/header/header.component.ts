@@ -1,4 +1,3 @@
-import { Subject } from 'rxjs';
 import {
     Component,
     ElementRef,
@@ -7,13 +6,9 @@ import {
     Renderer2,
     ViewChild,
 } from '@angular/core';
-import {
-    faBars,
-    faBell,
-    faChevronDown,
-    faMaximize,
-} from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from 'app/features/auth/services/auth.service';
+
+import { AccountDetail } from '@features/account/models/account.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -22,8 +17,8 @@ import { AuthService } from 'app/features/auth/services/auth.service';
 })
 export class HeaderComponent {
     name!: string;
+    role!: string;
     showDropdown = false;
-    icons = { faBars, faBell, faMaximize, faChevronDown };
     searchInput = '';
 
     @ViewChild('dropdown') dropdown!: ElementRef;
@@ -31,15 +26,17 @@ export class HeaderComponent {
 
     @Output() onDisplay = new EventEmitter<boolean>();
 
-    constructor(
-        private renderer: Renderer2,
-        private authService: AuthService
-    ) {}
+    constructor(private renderer: Renderer2, private router: Router) {}
 
     ngOnInit() {
-        this.authService.user.subscribe((user) => {
-            this.name = user;
-        });
+        const account: AccountDetail = JSON.parse(
+            localStorage.getItem('account') as string
+        );
+
+        this.name = account.username;
+        if (account.role === 'ROLE_ADMIN') {
+            this.role = 'admin';
+        }
 
         this.renderer.listen('window', 'click', (e: Event) => {
             if (
@@ -59,7 +56,9 @@ export class HeaderComponent {
         this.showDropdown = false;
     }
 
-    onLogout() {
-        this.authService.resetAuth();
+    handleLogout() {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('account');
+        this.router.navigate(['login']);
     }
 }

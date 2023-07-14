@@ -44,4 +44,8 @@ export class ListDataComponent implements OnInit {
         this.rows = event.rows;
         this.onPageChange.emit(event);
     }
+
+    handleTogglePassword(e: any) {
+        console.log(e)
+    }
 }

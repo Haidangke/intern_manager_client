@@ -4,6 +4,7 @@ import {
     faGauge,
     faGraduationCap,
     faUsers,
+    faRectangleList,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const sidebarTabs = [
@@ -69,6 +70,19 @@ export const sidebarTabs = [
                 id: 51,
                 name: 'Project List',
                 link: 'projects',
+            },
+        ],
+    },
+    {
+        id: 6,
+        name: 'Accounts',
+        icon: faRectangleList,
+        prefix: 'accounts',
+        children: [
+            {
+                id: 51,
+                name: 'Account List',
+                link: 'accounts',
             },
         ],
     },

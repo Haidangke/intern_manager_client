@@ -1,14 +1,14 @@
 <div class="flex bg-content justify-center items-center py-8  w-full min-h-[100vh]">
-    <div class="bg-light px-6 pt-10 pb-12 shadow-2 border-round xl:w-[46%] w-[50%] mt-[-5%]">
+    <div class="bg-light px-6 pt-10 pb-12 shadow-2 border-round xl:w-[42%] w-[50%] mt-[-5%]">
         <div class=" text-center mb-5">
             <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
         </div>
 
         <form [formGroup]="formLogin" (submit)="handleSubmit()">
             <div class="mb-6">
-                <label for="email1" class="block text-900 font-medium mb-2">Email</label>
-                <input autocomplete="email" id="email1" type="text" formControlName="email" placeholder="Email address"
-                    pInputText class="w-full ">
+                <label for="username" class="block text-900 font-medium mb-2">Username</label>
+                <input autocomplete="username" id="username" type="text" formControlName="username"
+                    placeholder="Username" pInputText class="w-full ">
             </div>
 
             <div class="mb-6">
@@ -18,20 +18,12 @@
                     class="w-full" [toggleMask]="true"></p-password>
             </div>
 
-            <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center">
-                    <p-checkbox formControlName="isRemember" id="rememberme1" [binary]="true"
-                        styleClass="mr-2"></p-checkbox>
-                    <label for="rememberme1" class="text-900">Remember me</label>
-                </div>
-            </div>
-
             <p *ngIf="message" class="px-4 py-6 bg-red-200 text-red-800 border border-red-300 rounded text-sm">
                 {{message}}</p>
 
             <div class="mt-12">
-                <p-button [disabled]="!formLogin.valid" class="w-full" icon="pi pi-user" type="submit" label="Submit"
-                    [loading]=" isLoading"></p-button>
+                <p-button [disabled]="!formLogin.valid" class="w-full" type="submit" label="Submit"
+                    [loading]="isLoading"></p-button>
             </div>
         </form>
     </div>

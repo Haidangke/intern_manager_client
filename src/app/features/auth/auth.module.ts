@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { LoginGuard } from '@core/guards';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -12,7 +11,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AuthComponent } from './auth.component';
 @NgModule({
     declarations: [AuthComponent],
-    
+
     imports: [
         CommonModule,
         SharedModule,
@@ -24,9 +23,7 @@ import { AuthComponent } from './auth.component';
         ButtonModule,
         ReactiveFormsModule,
 
-        RouterModule.forChild([
-            { path: '', canActivate: [LoginGuard], component: AuthComponent },
-        ]),
+        RouterModule.forChild([{ path: '', component: AuthComponent }]),
     ],
 })
 export class AuthModule {}

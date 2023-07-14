@@ -24,7 +24,8 @@ export class BreadcrumbComponent implements OnInit {
                 const url: string = event.routerEvent.url;
                 if (!url) return;
                 const urls = url.split('/').filter((url) => url);
-                this.isDisplay = !urls.includes('home');
+
+                this.isDisplay = !urls.includes('home') && urls.length > 0;
                 this.items = urls.map((url) => {
                     return {
                         label: BREAD_CRUMB.includes(url)

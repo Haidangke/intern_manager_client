@@ -81,6 +81,14 @@
                             </span>
                         </ng-container>
 
+                        <ng-container *ngSwitchCase="'password'">
+                            <div class="flex gap-2 items-center">
+                                <input (click)="handleTogglePassword($event)"
+                                    class="w-20 cursor-default border-none outline-none" type="password"
+                                    [value]="rowData[col.field]" readonly>
+                            </div>
+                        </ng-container>
+
                         <!-- default -->
                         <ng-container *ngSwitchDefault>{{ rowData[col.field] }}</ng-container>
                     </td>

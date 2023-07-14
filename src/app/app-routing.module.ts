@@ -7,7 +7,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 
     {
-        path: 'auth',
+        path: 'login',
         loadChildren: () =>
             import('./features/auth/auth.module').then((m) => m.AuthModule),
     },
@@ -48,7 +48,14 @@ const routes: Routes = [
                 path: 'projects',
                 loadChildren: () =>
                     import('./features/project/project.module').then(
-                        (m) => m.ClassroomModule
+                        (m) => m.ProjectModule
+                    ),
+            },
+            {
+                path: 'accounts',
+                loadChildren: () =>
+                    import('./features/account/account.module').then(
+                        (m) => m.AccountModule
                     ),
             },
         ],
