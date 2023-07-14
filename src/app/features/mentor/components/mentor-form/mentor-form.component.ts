@@ -60,7 +60,12 @@ export class MentorFormComponent implements OnInit {
 
     handleSubmitting(loading: boolean) {
         this.isLoading = loading;
-        loading ? this.mentorForm.disable() : this.mentorForm.enable();
+        if (loading) {
+            this.mentorForm.disable();
+        } else {
+            this.mentorForm.enable();
+            this.mentorForm.reset();
+        }
     }
 
     handleSubmit() {

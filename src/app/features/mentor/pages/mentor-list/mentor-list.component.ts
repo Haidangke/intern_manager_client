@@ -73,7 +73,6 @@ export class MentorListComponent {
         this.isFetching = true;
         this.mentorService.getMentors(this.pagination).subscribe({
             next: (response) => {
-                console.log(response);
                 this.isFetching = false;
                 this.mentorList = response.content;
                 this.totalRecords = response.totalElements;
@@ -114,7 +113,7 @@ export class MentorListComponent {
         const { id, name } = mentor;
         this.confirmationService.confirm({
             header: 'Delete Mentor',
-            message: 'Are you sure that you want to delete this intern?',
+            message: 'Are you sure that you want to delete this mentor ?',
             icon: 'pi pi-exclamation-triangle',
 
             accept: () => {
@@ -122,6 +121,9 @@ export class MentorListComponent {
                 this.mentorService.deleteMentor(id).subscribe({
                     next: () => {
                         this.isDeleting = false;
+                        this.mentorList = [...this.mentorList].filter(
+                            (mentor) => mentor.id !== id
+                        );
                         this.messageService.add({
                             severity: 'success',
                             detail: `Mentor ${name} has been deleted successfully!`,

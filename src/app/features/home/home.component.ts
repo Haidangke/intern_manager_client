@@ -39,16 +39,5 @@ export class HomeComponent implements OnInit {
 
     constructor(private homeService: HomeService) {}
 
-    ngOnInit() {
-        this.homeService.getStarStudentList().subscribe({
-            next: (response) => {
-                if (response) {
-                    this.starStudentList = response.slice(0, 4);
-                }
-            },
-            error: (error) => {
-                console.log(error);
-            },
-        });
-    }
+    ngOnInit() {}
 }

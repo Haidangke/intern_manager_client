@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ClassroomRoutingModules } from './project-routing.module';
+import { ProjectRoutingModules } from './project-routing.module';
 import { ProjectListComponent } from './pages';
 import { DropdownModule } from 'primeng/dropdown';
 import { TabMenuModule } from 'primeng/tabmenu';
@@ -10,13 +10,14 @@ import { ButtonModule } from 'primeng/button';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { ProjectFormComponent } from './components';
 
 @NgModule({
-    declarations: [ ProjectListComponent],
+    declarations: [ProjectListComponent, ProjectFormComponent],
     imports: [
         SharedModule,
         ReactiveFormsModule,
-        ClassroomRoutingModules,
+        ProjectRoutingModules,
         FormsModule,
         DropdownModule,
         TabMenuModule,
@@ -27,4 +28,4 @@ import { InputTextModule } from 'primeng/inputtext';
         DropdownModule,
     ],
 })
-export class ClassroomModule {}
+export class ProjectModule {}
