@@ -11,6 +11,7 @@ export class ListDataComponent implements OnInit {
     @Input() data!: any[];
     @Input() cols!: ColListData[];
     @Input() title: string = '';
+    @Input() subTitles: string = '';
     @Input() fetching!: boolean;
 
     @Input() actions: ('update' | 'delete')[] = [];
@@ -20,6 +21,8 @@ export class ListDataComponent implements OnInit {
     @Input() totalRecords = 0;
 
     recordsColSpan!: number;
+    rows = 10;
+    first = 0;
 
     @Output() onAdd = new EventEmitter();
     @Output() onDelete = new EventEmitter<any>();
@@ -27,9 +30,6 @@ export class ListDataComponent implements OnInit {
     @Output() onPageChange = new EventEmitter<number>();
     @Output() onSizeChange = new EventEmitter<number>();
     @Output() onSearch = new EventEmitter<any>();
-
-    rows = 10;
-    first = 0;
 
     ngOnInit(): void {
         this.recordsColSpan = this.cols.length + 1;
@@ -45,7 +45,5 @@ export class ListDataComponent implements OnInit {
         this.onPageChange.emit(event);
     }
 
-    handleTogglePassword(e: any) {
-        console.log(e)
-    }
+   
 }

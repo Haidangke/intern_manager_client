@@ -34,6 +34,14 @@
     }
 }
 
+.p-multiselect-item {
+    @apply text-sm;
+}
+
+.p-multiselect {
+    @apply w-full;
+}
+
 //Button
 .p-button {
     @apply w-full;

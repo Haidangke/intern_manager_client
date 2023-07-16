@@ -23,7 +23,7 @@ export class TeamListComponent implements OnInit {
     listTeam: TeamDetail[] = [];
     isLoading: boolean = false;
     isDeleting: boolean = false;
-    isAddDialog = false;
+    isDialog = false;
 
     pageInfo: PageInfo = {
         size: 10,

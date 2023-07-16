@@ -1,0 +1,2 @@
+<a *ngIf="link; else notLink" class="text-blue-500 hover:underline" [routerLink]="link">{{content }}</a>
+<ng-template #notLink>{{ content }}</ng-template>

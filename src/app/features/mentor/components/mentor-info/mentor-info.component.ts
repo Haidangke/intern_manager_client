@@ -41,7 +41,6 @@ export class MentorInfoComponent implements OnInit {
         },
         {
             field: 'status',
-            type: 'status',
         },
         {
             field: 'team',

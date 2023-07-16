@@ -1,10 +1,9 @@
 <app-list-data [data]="accountList" [cols]="cols" [fetching]="isFetching" [deleting]="isDeleting"
     [actions]="['update', 'delete']" title="Account" [pagination]="pagination" [totalRecords]="totalRecords"
-    (onAdd)="isAddDialog = true" (onUpdate)="handleUpdateAccount($event)" (onDelete)="handleDeleteAccount($event)"
+    (onAdd)="isDialog = true" (onUpdate)="handleUpdateAccount($event)" (onDelete)="handleDeleteAccount($event)"
     (onPageChange)="handlePageChange($event)" (onSizeChange)="handleSizeChange($event)"></app-list-data>
 
 <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-<p-dialog [resizable]="false" [draggable]="false" header="Add Account" [(visible)]="isAddDialog"
-    [style]="{width: '70%'}">
+<p-dialog [resizable]="false" [draggable]="false" header="Add Account" [(visible)]="isDialog" [style]="{width: '70%'}">
     <app-account-form></app-account-form>
 </p-dialog>

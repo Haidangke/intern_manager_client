@@ -7,6 +7,7 @@ import {
     TabMenuComponent,
     ListDataComponent,
     ValidationErrorComponent,
+    RenderColComponent
 } from './components';
 
 import { DropdownDirective } from './directives';
@@ -30,6 +31,7 @@ import { ToastModule } from 'primeng/toast';
         ListDataComponent,
         TabMenuComponent,
         ValidationErrorComponent,
+        RenderColComponent
     ],
     imports: [
         CommonModule,

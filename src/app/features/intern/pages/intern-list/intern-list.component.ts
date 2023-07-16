@@ -27,7 +27,7 @@ export class InternListComponent {
     totalRecords = 0;
     isFetching = false;
     isDeleting = false;
-    isAddDialog = false;
+    isDialog = false;
 
     ref!: DynamicDialogRef;
 
@@ -54,7 +54,6 @@ export class InternListComponent {
         },
         {
             field: 'status',
-            type: 'status',
         },
         {
             field: 'mentor',

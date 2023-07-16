@@ -6,3 +6,7 @@ export interface Project {
 export interface ProjectParams {
     name: string;
 }
+
+export interface ProjectDetail extends Project {
+    totalIntern: number;
+}

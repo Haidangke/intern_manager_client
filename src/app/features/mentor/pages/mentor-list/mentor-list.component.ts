@@ -25,7 +25,7 @@ export class MentorListComponent {
     searchKeyword: string = '';
     isFetching = false;
     isDeleting = false;
-    isAddDialog = false;
+    isDialog = false;
     totalRecords = 0;
 
     pagination: PageInfo = {
@@ -51,10 +51,12 @@ export class MentorListComponent {
         {
             header: 'Interns',
             field: 'totalIntern',
+            type: 'quantity',
         },
         {
             header: 'Teams',
             field: 'totalTeam',
+            type: 'quantity',
         },
         {
             field: 'gender',

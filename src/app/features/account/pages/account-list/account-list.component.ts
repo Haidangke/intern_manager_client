@@ -1,12 +1,11 @@
-import { AccountDetail } from '../../models/account.model';
-import { AccountService } from '../../services/account.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColListData } from '@shared/components/list-data/list-data.model';
 import { PageInfo } from '@shared/model/common';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { map } from 'rxjs';
+import { AccountDetail } from '../../models/account.model';
+import { AccountService } from '../../services/account.service';
 
 @Component({
     selector: 'app-account-list',
@@ -26,7 +25,7 @@ export class AccountListComponent {
     searchKeyword: string = '';
     isFetching = false;
     isDeleting = false;
-    isAddDialog = false;
+    isDialog = false;
     totalRecords = 0;
 
     pagination: PageInfo = {
@@ -56,12 +55,12 @@ export class AccountListComponent {
     ];
 
     ngOnInit() {
-        this.fetchMentors();
+        this.fetchAccounts();
     }
 
-    fetchMentors() {
+    fetchAccounts() {
         this.isFetching = true;
-        this.accountService.getListAccounts().subscribe({
+        this.accountService.getAccounts().subscribe({
             next: (res) => {
                 this.accountList = res.content.map((account) => {
                     const linked_user = account.intern || account.mentor;
@@ -80,16 +79,16 @@ export class AccountListComponent {
 
     handlePageChange(event: any) {
         this.pagination.page = event.page;
-        this.fetchMentors();
+        this.fetchAccounts();
     }
 
     handleSizeChange(event: any) {
         this.pagination.size = event.value;
-        this.fetchMentors();
+        this.fetchAccounts();
     }
 
     handleSubmitSuccess() {
-        this.fetchMentors();
+        this.fetchAccounts();
     }
 
     handleUpdateAccount(account: AccountDetail) {}
@@ -102,7 +101,7 @@ export class AccountListComponent {
         //     icon: 'pi pi-exclamation-triangle',
         //     accept: () => {
         //         this.isDeleting = true;
-        //         this.mentorService.deleteMentor(id).subscribe({
+        //         this.Accountservice.deleteMentor(id).subscribe({
         //             next: () => {
         //                 this.isDeleting = false;
         //                 this.mentorList = [...this.mentorList].filter(
