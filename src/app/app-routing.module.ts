@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards';
+import { AdminGuard } from '@core/guards/admin.guard';
 import { AdminLayoutComponent } from '@core/layouts';
+import { NotFoundPageComponent } from '@shared/components/not-found-page/not-found-page.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,6 +24,7 @@ const routes: Routes = [
                     import('./features/home/home.module').then(
                         (m) => m.HomeModule
                     ),
+                canActivate: [AdminGuard],
             },
             {
                 path: 'interns',
@@ -36,6 +39,7 @@ const routes: Routes = [
                     import('./features/team/team.module').then(
                         (m) => m.TeamModule
                     ),
+                canActivate: [AdminGuard],
             },
             {
                 path: 'mentors',
@@ -43,6 +47,7 @@ const routes: Routes = [
                     import('./features/mentor/mentor.module').then(
                         (m) => m.MentorModule
                     ),
+                canActivate: [AdminGuard],
             },
             {
                 path: 'projects',
@@ -50,6 +55,7 @@ const routes: Routes = [
                     import('./features/project/project.module').then(
                         (m) => m.ProjectModule
                     ),
+                canActivate: [AdminGuard],
             },
             {
                 path: 'accounts',
@@ -57,8 +63,19 @@ const routes: Routes = [
                     import('./features/account/account.module').then(
                         (m) => m.AccountModule
                     ),
+                canActivate: [AdminGuard],
+            },
+
+            {
+                path: '**',
+                pathMatch: 'prefix',
+                redirectTo: '404',
             },
         ],
+    },
+    {
+        path: '404',
+        component: NotFoundPageComponent,
     },
 ];
 

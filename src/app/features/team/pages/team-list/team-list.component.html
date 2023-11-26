@@ -1,8 +1,28 @@
-<app-list-data (onUpdate)="handleUpdateTeam($event)" (onAdd)="isDialog = true" [data]="listTeam" title="Team"
-    [fetching]="isLoading" [deleting]="isDeleting" [cols]="cols" (onDelete)="handleDeleteTeam($event)"
-    [pagination]="pageInfo" [actions]="['update', 'delete']">
+<app-list-data
+    (onUpdate)="handleUpdateTeam($event)"
+    (onAdd)="isDialog = true"
+    [data]="listTeam"
+    title="Team"
+    [fetching]="isLoading"
+    [deleting]="isDeleting"
+    [cols]="cols"
+    (onDelete)="handleDeleteTeam($event)"
+    [pagination]="pageInfo"
+    [actions]="['update', 'delete']"
+>
 </app-list-data>
 
-<p-dialog [resizable]="false" [draggable]="false" header="Add Team" [(visible)]="isDialog" [style]="{width: '50%'}">
-    <app-team-form></app-team-form>
+<p-dialog
+    [resizable]="false"
+    [draggable]="false"
+    header="Add Team"
+    [(visible)]="isDialog"
+    (onHide)="onHide()"
+    [style]="{ width: '50%' }"
+>
+    <app-team-form
+        [team]="curTeam"
+        (onSubmitSuccess)="onSubmitTeam()"
+    ></app-team-form>
 </p-dialog>
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>

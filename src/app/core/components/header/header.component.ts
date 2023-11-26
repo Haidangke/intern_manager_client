@@ -34,9 +34,7 @@ export class HeaderComponent {
         );
 
         this.name = account.username;
-        if (account.role === 'ROLE_ADMIN') {
-            this.role = 'admin';
-        }
+        this.role = account.role;
 
         this.renderer.listen('window', 'click', (e: Event) => {
             if (

@@ -14,6 +14,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from '@shared/shared.module';
+import { MessageService } from 'primeng/api';
 
 registerLocaleData(en);
 
@@ -29,6 +31,7 @@ registerLocaleData(en);
         ReactiveFormsModule,
         FormsModule,
         CoreModule,
+        SharedModule,
         ToastrModule.forRoot(),
     ],
     providers: [
@@ -37,6 +40,7 @@ registerLocaleData(en);
             useClass: AuthInterceptor,
             multi: true,
         },
+        MessageService
     ],
     bootstrap: [AppComponent],
 })

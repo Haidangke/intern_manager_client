@@ -31,7 +31,7 @@ interface ProjectData {
 })
 export class ProjectDetailComponent {
     constructor(
-        private toastService: ToastrService,
+        private messageService: MessageService,
         private confirmationService: ConfirmationService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -219,12 +219,16 @@ export class ProjectDetailComponent {
                         (item) => !res.map((x) => x.intern.id).includes(item.id)
                     );
 
-                    this.toastService.success(
-                        `Add intern from project ${this.project.data?.name} successfully`
-                    );
+                    this.messageService.add({
+                        severity: 'success',
+                        detail: `Add intern from project ${this.project.data?.name} successfully`,
+                    });
                 },
                 error: (error) => {
-                    console.log(error);
+                    this.messageService.add({
+                        severity: 'error',
+                        detail: `Add intern from project ${this.project.data?.name} failure`,
+                    });
                     this.creating = false;
                 },
             });
@@ -251,16 +255,17 @@ export class ProjectDetailComponent {
 
                             this.internsNotInProject.data.push(intern);
 
-                            this.toastService.success(
-                                `Intern ${intern.name} has been removed from project ${project.name}`
-                            );
+                            this.messageService.add({
+                                severity: 'success',
+                                detail: `Intern ${intern.name} has been removed from project ${project.name}`,
+                            });
                         },
-                        error: (error) => {
+                        error: () => {
                             this.projectInternList.deleting = false;
-
-                            this.toastService.error(
-                                `Intern ${intern.name} could not be deleted! from project ${project.name}`
-                            );
+                            this.messageService.add({
+                                severity: 'error',
+                                detail: `Intern ${intern.name} could not be deleted! from project ${project.name}`,
+                            });
                         },
                     });
             },

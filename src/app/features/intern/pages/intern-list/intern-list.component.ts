@@ -7,12 +7,13 @@ import { InternService } from '../../services/intern.service';
 import { Router } from '@angular/router';
 import { ColListData } from '@shared/components/list-data/list-data.model';
 import { PageInfo } from '@shared/model/common';
+import { Toast } from 'ngx-toastr';
 
 @Component({
     selector: 'app-student-list',
     templateUrl: './intern-list.component.html',
     styleUrls: ['./intern-list.component.scss'],
-    providers: [ConfirmationService, DialogService, MessageService],
+    providers: [ConfirmationService, DialogService],
 })
 export class InternListComponent {
     constructor(
@@ -124,8 +125,44 @@ export class InternListComponent {
     //     });
     // }
 
-    handleAddInternSuccess(intern: InternDetail) {
-        this.internList.unshift(intern);
+    handleDeleteIntern(intern: InternDetail) {
+        const { id, name } = intern;
+        this.confirmationService.confirm({
+            header: 'Delete Intern',
+            message: 'Are you sure that you want to delete this intern ?',
+            icon: 'pi pi-exclamation-triangle',
+
+            accept: () => {
+                this.isDeleting = true;
+                this.internService.deleteIntern(id).subscribe({
+                    next: () => {
+                        this.isDeleting = false;
+                        this.fetchStudentList();
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: `Intern ${name} has been deleted successfully!`,
+                        });
+                    },
+                    error: (error) => {
+                        this.isDeleting = false;
+
+                        this.messageService.add({
+                            severity: 'error',
+                            detail: `Intern ${name} could not be deleted!.`,
+                        });
+                    },
+                });
+            },
+        });
+    }
+
+    handleAddInternSuccess() {
+        this.fetchStudentList()
+        this.isDialog = false;
+        this.messageService.add({
+            severity: 'success',
+            detail: 'Create intern successfully'
+        })
     }
 
     handleUpdateIntern(intern: InternDetail) {

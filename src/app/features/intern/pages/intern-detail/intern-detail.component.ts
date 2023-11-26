@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Intern, InternDetail } from '../../models/intern.model';
+import { InternDetail } from '../../models/intern.model';
 import { InternService } from '../../services/intern.service';
 import { MenuItem } from 'primeng/api';
 import { switchMap } from 'rxjs';
@@ -13,7 +13,7 @@ import { switchMap } from 'rxjs';
 export class StudentDetailComponent {
     items: MenuItem[] = [
         { label: 'Info', icon: 'pi pi-fw pi-home', id: 'info' },
-        { label: 'Edit', icon: 'pi pi-fw pi-calendar', id: 'edit' },
+        { label: 'Edit', icon: 'pi pi-pencil', id: 'edit' },
         { label: 'Report', icon: 'pi pi-fw pi-calendar', id: 'report' },
     ];
 
@@ -34,7 +34,7 @@ export class StudentDetailComponent {
             if (edit) {
                 this.activeItem = this.items[1];
             } else {
-                this.activeItem = this.items[1];
+                this.activeItem = this.items[0];
             }
         });
     }

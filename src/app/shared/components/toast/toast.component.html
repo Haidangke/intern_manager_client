@@ -1,0 +1,18 @@
+<p-toast [position]="'top-right'" [styleClass]="'right-1 max-w-[100vw]'">
+    <ng-template let-message pTemplate="message">
+        <div class="flex items-center gap-3">
+            <i
+                class="text-xl/5"
+                [ngClass]="{
+                    'pi pi-info-circle': message.severity === 'info',
+                    'pi pi-minus-circle': message.severity === 'warn',
+                    'pi pi-times-circle': message.severity === 'error',
+                    'pi pi-check-circle': message.severity === 'success'
+                }"
+            ></i>
+            <div class="text-sm font-semibold toast-content">
+                {{ message.detail }}
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

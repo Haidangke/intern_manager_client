@@ -14,10 +14,12 @@ export class InternService {
         pagination: PageInfo = {
             size: 10,
             page: 0,
-        }
+        },
+        mentorId?: string
     ) {
+        const params = { ...pagination, mentor: mentorId ?? '' };
         return this.http.get<ResponsePagination<InternDetail>>('interns', {
-            params: { ...pagination },
+            params: { ...params },
         });
     }
 

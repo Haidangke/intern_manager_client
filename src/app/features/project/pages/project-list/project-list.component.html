@@ -1,10 +1,94 @@
-<app-list-data [data]="projectList" [cols]="cols" [fetching]="isFetching" [deleting]="isDeleting"
-    [actions]="['update', 'delete']" title="Project" [pagination]="pagination" [totalRecords]="totalRecords"
-    (onAdd)="isDialog = true" (onUpdate)="handleUpdateProject($event)" (onDelete)="handleDeleteProject($event)"
-    (onPageChange)="handlePageChange($event)" (onSizeChange)="handleSizeChange($event)">
-</app-list-data>
+<div class="border-x">
+    <p-table [value]="projectList" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="caption">
+            <h2 class="mb-4">Project Management</h2>
+            <div class="flex justify-between">
+                <input type="text" pInputText placeholder="Search project" />
+                <button class="!w-fit" (click)="onAddProject()" pButton>
+                    Add project
+                </button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Interns</th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row="rowIndex" let-project>
+            <tr>
+                <td>{{ row + 1 }}</td>
+                <td>{{ project.name }}</td>
+                <td>{{ project.totalIntern }} intern</td>
+                <td>
+                    <div class="flex gap-4 items-center">
+                        <i
+                            (click)="onUpdateProject(project)"
+                            class="pi pi-pencil cursor-pointer"
+                        ></i>
+                        <i
+                            (click)="handleDeleteProject(project)"
+                            class="pi pi-trash cursor-pointer"
+                        ></i>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
 
-<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-<p-dialog [resizable]="false" [draggable]="false" header="Add Project" [(visible)]="isDialog" [style]="{width: '50%'}">
-    <app-project-form></app-project-form>
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+<p-dialog
+    [resizable]="false"
+    [draggable]="false"
+    header="Add Project"
+    [(visible)]="isDialog"
+    [style]="{ width: '50%' }"
+>
+    <form #form="ngForm">
+        <div class="flex flex-col gap-4 bg-light rounded-md border-1">
+            <!-- Name -->
+            <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2">
+                    <label
+                        class="text-sm text-gray-500 font-medium"
+                        htmlFor="username"
+                        >Name</label
+                    >
+                    <input
+                        placeholder="Name"
+                        pInputText
+                        id="name"
+                        name="name"
+                        [(ngModel)]="projectForm.name"
+                    />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label
+                        class="text-sm text-gray-500 font-medium"
+                        htmlFor="username"
+                        >Interns</label
+                    >
+                    <p-multiSelect
+                        appendTo="body"
+                        [options]="internList"
+                        optionLabel="name"
+                        name="interns"
+                        placeholder="Select Interns"
+                        [(ngModel)]="projectForm.interns"
+                    ></p-multiSelect>
+                </div>
+            </div>
+        </div>
+        <div class="w-full flex justify-end mt-8">
+            <p-button
+                (onClick)="handleSubmit()"
+                type="submit"
+                label="Submit"
+                [disabled]="!form.valid"
+            ></p-button>
+        </div>
+    </form>
 </p-dialog>

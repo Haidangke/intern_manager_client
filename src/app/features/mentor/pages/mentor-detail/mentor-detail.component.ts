@@ -57,4 +57,9 @@ export class MentorDetailComponent implements OnInit {
                 },
             });
     }
+
+    onChangeTab(tab: any) {
+        console.log(tab);
+        this.activeItem = tab;
+    }
 }

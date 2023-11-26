@@ -2,11 +2,13 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './services/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss'],
+    providers: [MessageService],
 })
 export class AuthComponent implements OnInit {
     message = '';
@@ -17,7 +19,8 @@ export class AuthComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private router: Router,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private messageService: MessageService
     ) {}
 
     ngOnInit(): void {
@@ -41,7 +44,11 @@ export class AuthComponent implements OnInit {
                 this.router.navigate(['']);
             },
             error: (error) => {
-                console.log({ error });
+                this.isLoading = false;
+                this.messageService.add({
+                    severity: 'error',
+                    detail: 'Username or password incorrect',
+                });
             },
         });
     }

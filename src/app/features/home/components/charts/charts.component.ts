@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { InternDetail } from '@features/intern/models/intern.model';
+import { TeamDetail } from '@features/team/models/team.model';
 
 @Component({
     selector: 'app-charts',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./charts.component.scss'],
 })
 export class ChartsComponent implements OnInit {
+    @Input() teams: TeamDetail[] = [];
+    @Input() interns: InternDetail[] = [];
     data: any;
     options: any;
     data2: any;
@@ -13,6 +17,13 @@ export class ChartsComponent implements OnInit {
     data3: any;
     options3: any;
     ngOnInit(): void {
+        console.log(this.teams);
+        this.teams = [...this.teams].sort(
+            (a, b) => b.totalIntern - a.totalIntern
+        );
+        // console.log([
+        //     ...this.teams.splice(0, 4).map((team) => team.totalIntern),
+        // ]);
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue(
@@ -21,10 +32,12 @@ export class ChartsComponent implements OnInit {
         const surfaceBorder =
             documentStyle.getPropertyValue('--surface-border');
         this.data = {
-            labels: ['Front End', 'BackEnd', 'Tester', 'Other'],
+            labels: [...this.teams].splice(0, 4).map((team) => team.name),
             datasets: [
                 {
-                    data: [4, 4, 4, 10],
+                    data: [...this.teams]
+                        .splice(0, 4)
+                        .map((team) => team.totalIntern),
                     backgroundColor: [
                         documentStyle.getPropertyValue('--blue-500'),
                         documentStyle.getPropertyValue('--yellow-500'),
@@ -53,21 +66,31 @@ export class ChartsComponent implements OnInit {
         };
 
         this.data2 = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+            ],
             datasets: [
                 {
                     label: 'Internship',
-                    backgroundColor: documentStyle.getPropertyValue('--blue-500'),
+                    backgroundColor:
+                        documentStyle.getPropertyValue('--blue-500'),
                     borderColor: documentStyle.getPropertyValue('--blue-500'),
-                    data: [65, 59, 80, 81, 56, 55, 40]
+                    data: [65, 59, 80, 81, 56, 55, 40],
                 },
                 {
                     label: 'Candidate',
-                    backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+                    backgroundColor:
+                        documentStyle.getPropertyValue('--pink-500'),
                     borderColor: documentStyle.getPropertyValue('--pink-500'),
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                }
-            ]
+                    data: [28, 48, 40, 19, 86, 27, 90],
+                },
+            ],
         };
 
         this.options2 = {
@@ -76,34 +99,33 @@ export class ChartsComponent implements OnInit {
             plugins: {
                 legend: {
                     labels: {
-                        color: textColor
-                    }
-                }
+                        color: textColor,
+                    },
+                },
             },
             scales: {
                 x: {
                     ticks: {
                         color: textColorSecondary,
                         font: {
-                            weight: 500
-                        }
+                            weight: 500,
+                        },
                     },
                     grid: {
                         color: surfaceBorder,
-                        drawBorder: false
-                    }
+                        drawBorder: false,
+                    },
                 },
                 y: {
                     ticks: {
-                        color: textColorSecondary
+                        color: textColorSecondary,
                     },
                     grid: {
                         color: surfaceBorder,
-                        drawBorder: false
-                    }
-                }
-
-            }
+                        drawBorder: false,
+                    },
+                },
+            },
         };
 
         this.data3 = {

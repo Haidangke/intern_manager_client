@@ -1,14 +1,18 @@
 <app-header (onDisplay)="displaySidebar = true" />
 
-
 <app-sidebar [display]="displaySidebar" (onDisplay)="displaySidebar = false" />
 
-
 <div class="main">
-    <div class="main-content">
+    <div
+        [ngClass]="!(account.role === 'ROLE_ADMIN') ? 'pt-5' : ''"
+        class="main-content"
+    >
         <div class="wrapper">
-            <app-breadcrumb></app-breadcrumb>
+            <app-breadcrumb
+                *ngIf="account.role === 'ROLE_ADMIN'"
+            ></app-breadcrumb>
             <router-outlet></router-outlet>
         </div>
     </div>
 </div>
+

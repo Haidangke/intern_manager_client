@@ -28,6 +28,6 @@ export class AccountService {
     }
 
     deleteAccount(id: string) {
-        return this.http.delete('accounts' + id);
+        return this.http.delete('accounts/' + id);
     }
 }

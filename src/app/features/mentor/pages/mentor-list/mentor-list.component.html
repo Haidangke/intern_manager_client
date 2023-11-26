@@ -1,10 +1,29 @@
-<app-list-data [data]="mentorList" [cols]="cols" [fetching]="isFetching" [deleting]="isDeleting"
-    [actions]="['update', 'delete']" title="Mentor" [pagination]="pagination" [totalRecords]="totalRecords"
-    (onAdd)="isDialog = true" (onUpdate)="handleUpdateMentor($event)" (onDelete)="handleDeleteMentor($event)"
-    (onPageChange)="handlePageChange($event)" (onSizeChange)="handleSizeChange($event)"></app-list-data>
+<app-list-data
+    [data]="mentorList"
+    [cols]="cols"
+    [fetching]="isFetching"
+    [deleting]="isDeleting"
+    [actions]="['update', 'delete']"
+    title="Mentor"
+    [pagination]="pagination"
+    [totalRecords]="totalRecords"
+    (onAdd)="isDialog = true"
+    (onUpdate)="handleUpdateMentor($event)"
+    (onDelete)="handleDeleteMentor($event)"
+    (onPageChange)="handlePageChange($event)"
+    (onSizeChange)="handleSizeChange($event)"
+></app-list-data>
 
-<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-<p-dialog [resizable]="false" [draggable]="false" header="Add Mentor" [(visible)]="isDialog"
-    [style]="{width: '70%'}">
-    <app-mentor-form (onSubmitSuccess)="handleSubmitSuccess()" [isDialog]="true"></app-mentor-form>
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+<p-dialog
+    [resizable]="false"
+    [draggable]="false"
+    header="Add Mentor"
+    [(visible)]="isDialog"
+    [style]="{ width: '70%' }"
+>
+    <app-mentor-form
+        (onSubmitSuccess)="handleSubmitSuccess()"
+        [isDialog]="true"
+    ></app-mentor-form>
 </p-dialog>

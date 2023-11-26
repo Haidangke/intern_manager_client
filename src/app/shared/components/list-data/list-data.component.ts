@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ColListData } from './list-data.model';
 import { PageInfo } from '@shared/model/common';
+import { Table } from 'primeng/table';
 
 @Component({
     selector: 'app-list-data',
@@ -20,6 +21,8 @@ export class ListDataComponent implements OnInit {
     @Input() isCaption = true;
     @Input() totalRecords = 0;
 
+    @ViewChild('dt1') dt1!: Table;
+
     recordsColSpan!: number;
     rows = 10;
     first = 0;
@@ -29,7 +32,6 @@ export class ListDataComponent implements OnInit {
     @Output() onUpdate = new EventEmitter<any>();
     @Output() onPageChange = new EventEmitter<number>();
     @Output() onSizeChange = new EventEmitter<number>();
-    @Output() onSearch = new EventEmitter<any>();
 
     ngOnInit(): void {
         this.recordsColSpan = this.cols.length + 1;
@@ -45,5 +47,8 @@ export class ListDataComponent implements OnInit {
         this.onPageChange.emit(event);
     }
 
-   
+    search(event: any) {
+        this.dt1.filterGlobal(event.target?.value, 'contains')
+    }
+
 }

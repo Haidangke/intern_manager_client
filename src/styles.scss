@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./primeng.scss";
+@import './primeng.scss';
 
 .custom-toastr {
     display: flex;
@@ -38,13 +38,13 @@ img {
 // Fonts embedded
 @font-face {
     font-family: Roboto;
-    src: url("./assets/fonts/roboto-regular.woff2");
+    src: url('./assets/fonts/roboto-regular.woff2');
     font-weight: 400;
 }
 
 @font-face {
     font-family: Roboto;
-    src: url("./assets/fonts/roboto-medium.woff2");
+    src: url('./assets/fonts/roboto-medium.woff2');
     font-weight: 500;
 }
 
@@ -94,3 +94,4 @@ html *::-webkit-scrollbar-track {
         }
     }
 }
+

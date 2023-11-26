@@ -1,77 +1,122 @@
-<div class="fixed top-0 left-0 right-0 z-[999] flex h-header items-center w-full justify-end bg-light">
-
+<div
+    class="fixed top-0 left-0 right-0 z-[999] flex h-header items-center w-full justify-end bg-light"
+>
     <!-- Menu button -->
-    <div class="absolute left-[2%] grow-0 lg:grow order-1 lg:order-2 mx-5 lg:mx-0">
+    <div
+        *ngIf="role === 'ROLE_ADMIN'"
+        class="absolute left-[2%] grow-0 lg:grow order-1 lg:order-2 mx-5 lg:mx-0"
+    >
         <button class="text-gray-500" (click)="onDisplay.emit(true)">
-            <i class="pi pi-bars" style="font-size: 24px;"></i>
+            <i class="pi pi-bars" style="font-size: 24px"></i>
         </button>
     </div>
 
     <!-- Right section -->
-    <div class="wrapper h-full flex items-center justify-between w-full order-3 relative select-none">
+    <div
+        class="wrapper h-full flex items-center justify-between w-full order-3 relative select-none"
+    >
         <div class="relative">
-            <span class="p-input-icon-left">
+            <span *ngIf="role === 'ROLE_ADMIN'" class="p-input-icon-left">
                 <i class="pi pi-search"></i>
-                <input [(ngModel)]="searchInput" type="text" pInputText placeholder="Search" />
+                <input
+                    [(ngModel)]="searchInput"
+                    type="text"
+                    pInputText
+                    placeholder="Search"
+                />
             </span>
-            <div *ngIf="searchInput"
-                class="py-4 absolute top-[calc(100%_+_10px)] bg-light w-[200%] max-h-[60vh] overflow-y-auto min-h-[40vh] shadow border">
+            <div
+                *ngIf="searchInput"
+                class="py-4 absolute top-[calc(100%_+_10px)] bg-light w-[200%] max-h-[60vh] overflow-y-auto min-h-[40vh] shadow border"
+            >
                 <div class="pl-4 pt-2 font-medium">Interns</div>
                 <ul>
-                    <li *ngFor="let item of [1, 2, 3]"
-                        class="flex px-4 py-2 cursor-pointer items-center hover:bg-slate-100">
-                        <p-avatar label="V" [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
-                            shape="circle"></p-avatar>
+                    <li
+                        *ngFor="let item of [1, 2, 3]"
+                        class="flex px-4 py-2 cursor-pointer items-center hover:bg-slate-100"
+                    >
+                        <p-avatar
+                            label="V"
+                            [style]="{
+                                'background-color': '#2196F3',
+                                color: '#ffffff'
+                            }"
+                            shape="circle"
+                        ></p-avatar>
                         <div class="flex flex-col gap-1 ml-2">
                             <span class="text-sm text-gray-700">ronaldo</span>
-                            <span class="text-xs text-gray-500">ronaldo@gmail.com</span>
+                            <span class="text-xs text-gray-500">{{
+                                'ronaldo@gmail.com'
+                            }}</span>
                         </div>
                     </li>
                 </ul>
                 <div class="pl-4 pt-2 font-medium">Mentors</div>
                 <ul>
-                    <li *ngFor="let item of [1, 2, 3]"
-                        class="flex px-4 py-2 cursor-pointer items-center hover:bg-slate-100">
-                        <p-avatar label="V" [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
-                            shape="circle"></p-avatar>
+                    <li
+                        *ngFor="let item of [1, 2, 3]"
+                        class="flex px-4 py-2 cursor-pointer items-center hover:bg-slate-100"
+                    >
+                        <p-avatar
+                            label="V"
+                            [style]="{
+                                'background-color': '#2196F3',
+                                color: '#ffffff'
+                            }"
+                            shape="circle"
+                        ></p-avatar>
                         <div class="flex flex-col gap-1 ml-2">
                             <span class="text-sm text-gray-700">messi</span>
-                            <span class="text-xs text-gray-500">messi@gmail.com</span>
+                            <span class="text-xs text-gray-500">{{
+                                'ronaldo@gmail.com'
+                            }}</span>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="flex">
-            <div #userMenu class="h-10 flex items-center cursor-pointer group" (click)="onClickUserMenu()">
-                <div
-                    class="w-[40px] h-[40px] rounded-full p-[0.125rem] border-2 border-secondary mr-0 md:mr-2 group-hover:border-primary transition duration-200 ease-in-out">
-                    <img class="w-full rounded-full" src="../assets/images/avt.jpg" alt="" />
-                </div>
+            <div
+                #userMenu
+                class="h-10 flex items-center cursor-pointer group"
+                (click)="onClickUserMenu()"
+            >
+                <app-avatar [isAdmin]="true" [name]="name"></app-avatar>
             </div>
 
             <!-- Dropdown -->
-            <div #dropdown
+            <div
+                #dropdown
                 class="absolute top-full right-[20px] w-[200px] border border-solid border-secondary transition-200-ease-in-out"
-                [ngClass]="showDropdown ? 'visible translate-y-0 opacity-100' : 'opacity-0 translate-y-4 invisible'">
+                [ngClass]="
+                    showDropdown
+                        ? 'visible translate-y-0 opacity-100'
+                        : 'opacity-0 translate-y-4 invisible'
+                "
+            >
                 <div class="flex items-center gap-2 bg-[#f9f9f9] px-4 py-2">
-                    <img class="w-[40px] h-[40px] rounded-full" src="../assets/images/avt.jpg" alt="" />
+                    <app-avatar [isAdmin]="true" [name]="name"></app-avatar>
                     <div class="grow">
-                        <p class="text-dark text-base font-medium capitalize">{{ name }}</p>
-                        <p class="text-sidebar text-sm uppercase">{{role}}</p>
+                        <p class="text-dark text-base font-medium capitalize">
+                            {{ name }}
+                        </p>
                     </div>
                 </div>
                 <ul class="text-sm text-dark bg-light cursor-pointer">
                     <li
-                        class="px-4 py-2 text-[13px] border-t border-solid border-secondary hover:text-active hover:bg-[#e9ecef] transition-200-ease-in-out">
+                        class="px-4 py-2 text-[13px] border-t border-solid border-secondary hover:text-active hover:bg-[#e9ecef] transition-200-ease-in-out"
+                    >
                         My Profile
                     </li>
                     <li
-                        class="px-4 py-2 text-[13px] border-t border-solid border-secondary hover:text-active hover:bg-[#e9ecef] transition-200-ease-in-out">
+                        class="px-4 py-2 text-[13px] border-t border-solid border-secondary hover:text-active hover:bg-[#e9ecef] transition-200-ease-in-out"
+                    >
                         Inbox
                     </li>
-                    <li class="px-4 py-2 text-[13px] border-t border-solid border-secondary hover:text-active hover:bg-[#e9ecef] transition-200-ease-in-out"
-                        (click)="handleLogout()">
+                    <li
+                        class="px-4 py-2 text-[13px] border-t border-solid border-secondary hover:text-active hover:bg-[#e9ecef] transition-200-ease-in-out"
+                        (click)="handleLogout()"
+                    >
                         Logout
                     </li>
                 </ul>

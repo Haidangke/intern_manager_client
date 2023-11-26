@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { AdminLayoutComponent } from './layouts';
 import { ToastModule } from 'primeng/toast';
+import { SharedModule } from '@shared/shared.module';
 @NgModule({
     declarations: [
         HeaderComponent,
@@ -25,6 +26,7 @@ import { ToastModule } from 'primeng/toast';
         AdminLayoutComponent,
     ],
     imports: [
+        SharedModule,
         CommonModule,
         SidebarModule,
         RouterModule,
@@ -34,7 +36,7 @@ import { ToastModule } from 'primeng/toast';
         AvatarModule,
         FormsModule,
         BreadcrumbModule,
-        ToastModule
+        ToastModule,
     ],
     exports: [
         HeaderComponent,

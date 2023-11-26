@@ -11,7 +11,7 @@ import { PageInfo } from '@shared/model/common';
     selector: 'app-mentor-list',
     templateUrl: './mentor-list.component.html',
     styleUrls: ['./mentor-list.component.scss'],
-    providers: [ConfirmationService, DialogService, MessageService],
+    providers: [ConfirmationService, DialogService],
 })
 export class MentorListComponent {
     constructor(
@@ -100,6 +100,7 @@ export class MentorListComponent {
     }
 
     handleSubmitSuccess() {
+        this.isDialog = false;
         this.fetchMentors();
     }
 

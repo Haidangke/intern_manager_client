@@ -10,14 +10,13 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TabMenuModule } from 'primeng/tabmenu';
-import { ProjectFormComponent } from './components';
 import { ProjectDetailComponent, ProjectListComponent } from './pages';
 import { ProjectRoutingModules } from './project-routing.module';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
     declarations: [
         ProjectListComponent,
-        ProjectFormComponent,
         ProjectDetailComponent,
     ],
     imports: [
@@ -34,6 +33,7 @@ import { ProjectRoutingModules } from './project-routing.module';
         DropdownModule,
         DialogModule,
         MultiSelectModule,
+        TableModule
     ],
 })
 export class ProjectModule {}

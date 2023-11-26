@@ -5,6 +5,8 @@ import { InternDetail } from '@features/intern/models/intern.model';
 import { InternService } from '@features/intern/services/intern.service';
 import { PageInfo } from '@shared/model/common';
 import { ColListData } from '@shared/components/list-data/list-data.model';
+import { TeamService } from '@features/team/services/team.service';
+import { TeamDetail } from '@features/team/models/team.model';
 
 @Component({
     selector: 'app-mentor-info',
@@ -12,18 +14,17 @@ import { ColListData } from '@shared/components/list-data/list-data.model';
     styleUrls: ['./mentor-info.component.scss'],
 })
 export class MentorInfoComponent implements OnInit {
-    constructor(private internService: InternService) {}
+    constructor(
+        private internService: InternService,
+        private teamService: TeamService
+    ) {}
 
     @Input() mentor!: Mentor;
     internList!: InternDetail[];
-    internFetching = false;
+    teamList!: TeamDetail[];
+    isFetching = false;
 
-    pagination: PageInfo = {
-        page: 0,
-        size: 10,
-    };
-
-    cols: ColListData[] = [
+    internCols: ColListData[] = [
         {
             field: 'name',
             type: 'link',
@@ -52,7 +53,26 @@ export class MentorInfoComponent implements OnInit {
         },
     ];
 
-    totalRecords!: number;
+    teamCols: ColListData[] = [
+        {
+            field: 'name',
+            type: 'link',
+            url: ['teams', 'id'],
+        },
+        {
+            header: 'Interns',
+            field: 'totalIntern',
+        },
+        {
+            header: 'Mentor',
+            field: 'mentor',
+            type: 'child',
+            child: {
+                field: 'name',
+                url: ['mentors', 'id'],
+            },
+        },
+    ];
 
     items: MenuItem[] = [
         { label: 'Info', icon: 'pi pi-fw pi-home', id: 'info' },
@@ -73,17 +93,38 @@ export class MentorInfoComponent implements OnInit {
     }
 
     fetchInternList() {
-        this.internFetching = true;
-        this.internService.getInternList(this.pagination).subscribe({
+        this.isFetching = true;
+        this.internService.getInternList(undefined, this.mentor.id).subscribe({
             next: (response) => {
-                this.internFetching = false;
+                this.isFetching = false;
 
-                this.totalRecords = response.totalElements;
                 this.internList = response.content;
             },
             error: () => {
-                this.internFetching = false;
+                this.isFetching = false;
             },
         });
+    }
+
+    fetchTeamList() {
+        this.isFetching = true;
+        this.teamService.getList(undefined, this.mentor.id).subscribe({
+            next: (response) => {
+                this.isFetching = false;
+                this.teamList = response.content;
+            },
+            error: () => {
+                this.isFetching = false;
+            },
+        });
+    }
+
+    onTabChange(event: MenuItem) {
+        this.activeSubTab = event;
+        if (event.id === 'intern') {
+            this.fetchInternList();
+        } else {
+            this.fetchTeamList();
+        }
     }
 }

@@ -11,7 +11,7 @@ import { AccountService } from '../../services/account.service';
     selector: 'app-account-list',
     templateUrl: './account-list.component.html',
     styleUrls: ['./account-list.component.scss'],
-    providers: [ConfirmationService, DialogService, MessageService],
+    providers: [ConfirmationService, DialogService],
 })
 export class AccountListComponent {
     constructor(
@@ -46,11 +46,7 @@ export class AccountListComponent {
         },
         {
             header: 'Linked User',
-            field: 'linked_user',
-            child: {
-                field: '',
-                url: [''],
-            },
+            field: 'intern.name',
         },
     ];
 
@@ -62,12 +58,9 @@ export class AccountListComponent {
         this.isFetching = true;
         this.accountService.getAccounts().subscribe({
             next: (res) => {
-                this.accountList = res.content.map((account) => {
-                    const linked_user = account.intern || account.mentor;
-                    delete account.intern;
-                    delete account.mentor;
-                    return { ...account, linked_user };
-                });
+                this.accountList = res.content.filter(
+                    (account) => account.role !== 'ROLE_ADMIN'
+                );
                 this.isFetching = false;
             },
             error: (error) => {
@@ -91,36 +84,42 @@ export class AccountListComponent {
         this.fetchAccounts();
     }
 
+    onAddAccountSuccess() {
+        this.fetchAccounts();
+        this.isDialog = false;
+        this.messageService.add({
+            severity: 'success',
+            detail: 'Add account successfully',
+        });
+    }
+
     handleUpdateAccount(account: AccountDetail) {}
 
-    handleDeleteAccount(account: AccountDetail) {
-        // const { id, name } = mentor;
-        // this.confirmationService.confirm({
-        //     header: 'Delete Mentor',
-        //     message: 'Are you sure that you want to delete this mentor ?',
-        //     icon: 'pi pi-exclamation-triangle',
-        //     accept: () => {
-        //         this.isDeleting = true;
-        //         this.Accountservice.deleteMentor(id).subscribe({
-        //             next: () => {
-        //                 this.isDeleting = false;
-        //                 this.mentorList = [...this.mentorList].filter(
-        //                     (mentor) => mentor.id !== id
-        //                 );
-        //                 this.messageService.add({
-        //                     severity: 'success',
-        //                     detail: `Mentor ${name} has been deleted successfully!`,
-        //                 });
-        //             },
-        //             error: (error) => {
-        //                 this.isDeleting = false;
-        //                 this.messageService.add({
-        //                     severity: 'error',
-        //                     detail: `Mentor ${name} could not be deleted!.`,
-        //                 });
-        //             },
-        //         });
-        //     },
-        // });
+    handleDeleteAccount(id: string) {
+        this.confirmationService.confirm({
+            header: 'Delete Account',
+            message: 'Are you sure that you want to delete this account ?',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.isDeleting = true;
+                this.accountService.deleteAccount(id).subscribe({
+                    next: () => {
+                        this.isDeleting = false;
+                        this.fetchAccounts();
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: `Account has been deleted successfully!`,
+                        });
+                    },
+                    error: () => {
+                        this.isDeleting = false;
+                        this.messageService.add({
+                            severity: 'error',
+                            detail: `Account could not be deleted!.`,
+                        });
+                    },
+                });
+            },
+        });
     }
 }

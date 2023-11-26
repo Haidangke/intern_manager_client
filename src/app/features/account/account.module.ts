@@ -8,6 +8,7 @@ import { AccountFormComponent } from './components/account-form/account-form.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
     declarations: [AccountListComponent, AccountFormComponent],
@@ -19,6 +20,7 @@ import { InputTextModule } from 'primeng/inputtext';
         DropdownModule,
         ReactiveFormsModule,
         InputTextModule,
+        TableModule
     ],
 })
 export class AccountModule {}

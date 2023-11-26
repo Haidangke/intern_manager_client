@@ -1,5 +1,7 @@
 import { Team } from '@features/team/models/team.model';
 import { Mentor } from '@features/mentor/models/mentor.model';
+import { Account } from '@features/account/models/account.model';
+import { Project } from '@features/project/models';
 
 export interface Intern {
     id: string;
@@ -12,9 +14,10 @@ export interface Intern {
     technology: string;
     description: string;
     status: string;
+    account: Account;
 }
 
-export interface InternParams extends Intern {
+export interface InternParams {
     name: string;
     email: string;
     phone: string;
@@ -32,4 +35,5 @@ export interface InternParams extends Intern {
 export interface InternDetail extends Intern {
     mentor: Mentor;
     team: Team;
+    projects?: Project[];
 }
