@@ -13,12 +13,14 @@ export class TeamService {
         pr: PageInfo = {
             page: 0,
             size: 10,
-        }
+        },
+        mentorId?: string
     ) {
+        const params = { ...pr, mentor: mentorId ?? '' };
         return this.http.get<ResponsePagination<TeamDetail>>(
             'http://localhost:8080/api/v1/teams',
             {
-                params: { ...pr },
+                params: params,
             }
         );
     }
@@ -36,16 +38,17 @@ export class TeamService {
         );
     }
 
-    updateTeam(id: number, name: string) {
+    updateTeam(id: string, name: string, mentor: string) {
         return this.http.put<TeamDetail>(
             `http://localhost:8080/api/v1/teams/${id}`,
             {
                 name,
+                mentor,
             }
         );
     }
 
-    deleteTeam(id: number) {
+    deleteTeam(id: string) {
         return this.http.delete(`http://localhost:8080/api/v1/teams/${id}`);
     }
 }

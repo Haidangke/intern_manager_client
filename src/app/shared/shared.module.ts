@@ -7,6 +7,7 @@ import {
     TabMenuComponent,
     ListDataComponent,
     ValidationErrorComponent,
+    RenderColComponent
 } from './components';
 
 import { DropdownDirective } from './directives';
@@ -21,6 +22,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { RouterModule } from '@angular/router';
 import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { AvatarComponent } from './components/avatar/avatar.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +34,10 @@ import { ToastModule } from 'primeng/toast';
         ListDataComponent,
         TabMenuComponent,
         ValidationErrorComponent,
+        RenderColComponent,
+        NotFoundPageComponent,
+        AvatarComponent,
+        ToastComponent
     ],
     imports: [
         CommonModule,
@@ -55,6 +63,8 @@ import { ToastModule } from 'primeng/toast';
         ListDataComponent,
         TabMenuComponent,
         ValidationErrorComponent,
+        AvatarComponent,
+        ToastComponent
     ],
 })
 export class SharedModule {}

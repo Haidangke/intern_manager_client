@@ -1,4 +1,4 @@
-import { Intern } from './../../models/intern.model';
+import { InternDetail } from './../../models/intern.model';
 import { Component, Input } from '@angular/core';
 import {
     faCakeCandles,
@@ -24,5 +24,5 @@ export class InfoInternComponent {
         faLocationDot,
         faCakeCandles,
     };
-    @Input() intern!: Intern;
+    @Input() intern!: InternDetail;
 }

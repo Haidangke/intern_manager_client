@@ -3,7 +3,7 @@ import { Router, Scroll } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { filter } from 'rxjs';
 
-const BREAD_CRUMB = ['interns', 'mentors', 'teams'];
+const BREAD_CRUMB = ['interns', 'mentors', 'teams', 'projects', 'accounts'];
 
 @Component({
     selector: 'app-breadcrumb',

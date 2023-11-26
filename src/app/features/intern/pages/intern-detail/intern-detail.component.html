@@ -1,52 +1,80 @@
 <div class="min-h-screen-except-header">
     <!-- Content -->
-    <div class="min-h-[37.5rem] rounded-lg ">
+    <div class="min-h-[37.5rem] rounded-lg">
         <!-- Heading -->
         <div class="bg-light rounded-lg mb-6 shadow">
             <!-- Heading Info -->
-            <div *ngIf="intern; else skeleton;"
+            <div
+                *ngIf="intern; else skeleton"
                 class="flex flex-col md:flex-row items-center justify-between p-3 gap-2 md:gap-[7rem]"
-                style="background-image: url('../assets/images/bg-intern.png')">
+                style="background-image: url('../assets/images/bg-intern.png')"
+            >
                 <!-- Avatar -->
                 <div class="flex items-center gap-4 w-full md:w-auto">
-                    <div class="p-2 rounded-full bg-white">
-                        <img src="../assets/images/avt.jpg" alt="" class="w-20 h-20  rounded-full" />
-                    </div>
+                    <app-avatar
+                        class="!w-20 !h-20"
+                        textClass="!text-2xl"
+                        [name]="intern.name"
+                    ></app-avatar>
+
                     <div>
-                        <p class="text-xl text-dark font-medium">{{ intern.name }}</p>
+                        <p class="text-xl text-dark font-medium">
+                            {{ intern.name }}
+                        </p>
                         <p class="text-sm text-sidebar font-normal">
-                            <span>{{intern.email}}</span>
+                            <span>{{ intern.email }}</span>
                             <span class="mx-2">•</span>
-                            <span class="capitalize">{{intern.gender}}</span>
+                            <span class="capitalize">{{ intern.gender }}</span>
                         </p>
                     </div>
                 </div>
             </div>
 
             <div class="px-4 py-2">
-                <app-tab-menu (onActiveChange)="activeItem = $event" [items]="items"
-                    [activeItem]="activeItem"></app-tab-menu>
+                <app-tab-menu
+                    (onActiveChange)="activeItem = $event"
+                    [items]="items"
+                    [activeItem]="activeItem"
+                ></app-tab-menu>
             </div>
         </div>
 
-
         <!-- Left -->
         <ng-container *ngIf="intern">
-            <app-info-intern *ngIf="activeItem.id === 'info'" [intern]="intern"></app-info-intern>
-            <app-intern-form *ngIf="activeItem.id === 'edit'" [intern]="intern"></app-intern-form>
-            <app-intern-report *ngIf="activeItem.id === 'report'"></app-intern-report>
+            <app-info-intern
+                *ngIf="activeItem.id === 'info'"
+                [intern]="intern"
+            ></app-info-intern>
+            <app-intern-form
+                *ngIf="activeItem.id === 'edit'"
+                [intern]="intern"
+                (onSubmitSuccess)="fetchInternById()"
+            ></app-intern-form>
+            <app-intern-report
+                *ngIf="activeItem.id === 'report'"
+            ></app-intern-report>
         </ng-container>
         <!-- Main Content -->
-
     </div>
 </div>
 
 <ng-template #skeleton>
-    <div class="flex items-center p-3 gap-4" style="background-image: url('../assets/images/bg-intern.png')">
+    <div
+        class="flex items-center p-3 gap-4"
+        style="background-image: url('../assets/images/bg-intern.png')"
+    >
         <p-skeleton shape="circle" size="6rem"></p-skeleton>
         <div>
-            <p-skeleton height="1.5rem" width="8rem" styleClass="mb-2"></p-skeleton>
-            <p-skeleton height="1rem" width="5rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton
+                height="1.5rem"
+                width="8rem"
+                styleClass="mb-2"
+            ></p-skeleton>
+            <p-skeleton
+                height="1rem"
+                width="5rem"
+                styleClass="mb-2"
+            ></p-skeleton>
         </div>
     </div>
 </ng-template>

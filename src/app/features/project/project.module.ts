@@ -1,19 +1,24 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from '@shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProjectRoutingModules } from './project-routing.module';
-import { ProjectListComponent } from './pages';
-import { DropdownModule } from 'primeng/dropdown';
-import { TabMenuModule } from 'primeng/tabmenu';
+import { SharedModule } from '@shared/shared.module';
 import { ButtonModule } from 'primeng/button';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { ProjectFormComponent } from './components';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { ProjectDetailComponent, ProjectListComponent } from './pages';
+import { ProjectRoutingModules } from './project-routing.module';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
-    declarations: [ProjectListComponent, ProjectFormComponent],
+    declarations: [
+        ProjectListComponent,
+        ProjectDetailComponent,
+    ],
     imports: [
         SharedModule,
         ReactiveFormsModule,
@@ -26,6 +31,9 @@ import { ProjectFormComponent } from './components';
         ConfirmDialogModule,
         InputTextModule,
         DropdownModule,
+        DialogModule,
+        MultiSelectModule,
+        TableModule
     ],
 })
 export class ProjectModule {}

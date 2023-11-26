@@ -15,12 +15,12 @@ import { TeamService } from '@features/team/services/team.service';
     selector: 'app-intern-form',
     templateUrl: './intern-form.component.html',
     styleUrls: ['./intern-form.component.scss'],
-    providers: [MessageService],
+    providers: [],
 })
 export class InternFormComponent {
     genders = GENDER_DROPDOWN;
     status = STATUS_INTERN_DROPDOWN;
-
+    role = '';
     internForm!: FormGroup;
     isLoading = false;
     mentorList!: Mentor[];
@@ -39,6 +39,8 @@ export class InternFormComponent {
     ) {}
 
     ngOnInit() {
+        this.role = JSON.parse(localStorage.getItem('account') ?? '').role;
+
         // Init create student form group
         this.internForm = this.fb.group({
             name: this.fb.control(null, {
@@ -97,13 +99,18 @@ export class InternFormComponent {
                 gender,
                 address,
                 phone,
-                birthday,
+                birthday: new Date(birthday),
                 status,
                 description,
                 mentor: mentor.id,
                 technology,
                 team: team.id,
             });
+            if (this.role === 'ROLE_INTERN') {
+                this.internForm.get('mentor')?.disable();
+                this.internForm.get('team')?.disable();
+                this.internForm.get('status')?.disable();
+            }
         }
     }
 
@@ -117,6 +124,7 @@ export class InternFormComponent {
                 .subscribe({
                     next: (response) => {
                         this.isLoading = false;
+                        this.internForm.enable();
                         this.messageService.add({
                             severity: 'success',
                             detail: 'Update intern successfully',

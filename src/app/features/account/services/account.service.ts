@@ -8,7 +8,7 @@ import { AccountParams, AccountResponse } from '../models/account.model';
 export class AccountService {
     constructor(private http: HttpClient) {}
 
-    getListAccounts(
+    getAccounts(
         pr: PageInfo = {
             page: 0,
             size: 10,
@@ -28,6 +28,6 @@ export class AccountService {
     }
 
     deleteAccount(id: string) {
-        return this.http.delete('accounts' + id);
+        return this.http.delete('accounts/' + id);
     }
 }

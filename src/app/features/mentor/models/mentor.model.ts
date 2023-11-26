@@ -1,3 +1,5 @@
+import { Account } from "@features/account/models/account.model";
+
 export interface Mentor {
     id: string;
     name: string;
@@ -6,6 +8,7 @@ export interface Mentor {
     birthday: string;
     address: string;
     phone: string;
+    account: Account;
 }
 
 export interface MentorParams extends Mentor {

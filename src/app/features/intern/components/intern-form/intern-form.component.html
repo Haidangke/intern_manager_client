@@ -2,44 +2,103 @@
 <form [formGroup]="internForm" (ngSubmit)="handleSubmit()">
     <div class="flex gap-4">
         <!-- Basic -->
-        <div [ngClass]="{'p-0': isDialog, 'px-4 py-6': !isDialog}" class="flex-1 bg-light  rounded-md border-1">
+        <div
+            [ngClass]="{ 'p-0': isDialog, 'px-4 py-6': !isDialog }"
+            class="flex-1 bg-light rounded-md border-1"
+        >
             <h3 class="text-lg mb-2 font-medium">Basic Information</h3>
             <div class="grid grid-cols-2 gap-x-2 gap-y-4">
-                <div class="flex flex-col gap-2 ">
-                    <label class="text-sm text-gray-500 font-medium" htmlFor="username">Full Name</label>
-                    <input placeholder="Full name" pInputText id="username" formControlName="name" />
+                <div class="flex flex-col gap-2">
+                    <label
+                        class="text-sm text-gray-500 font-medium"
+                        htmlFor="username"
+                        >Full Name</label
+                    >
+                    <input
+                        placeholder="Full name"
+                        pInputText
+                        id="username"
+                        formControlName="name"
+                    />
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm text-gray-500 font-medium" htmlFor="address">Address</label>
-                    <input placeholder="Address" pInputText id="address" formControlName="address" />
+                    <label
+                        class="text-sm text-gray-500 font-medium"
+                        htmlFor="address"
+                        >Address</label
+                    >
+                    <input
+                        placeholder="Address"
+                        pInputText
+                        id="address"
+                        formControlName="address"
+                    />
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm text-gray-500 font-medium" htmlFor="gender">Gender</label>
-                    <p-dropdown placeholder="Gender" formControlName="gender" [options]="genders" optionValue="value"
-                        optionLabel="title"></p-dropdown>
+                    <label
+                        class="text-sm text-gray-500 font-medium"
+                        htmlFor="gender"
+                        >Gender</label
+                    >
+                    <p-dropdown
+                        placeholder="Gender"
+                        formControlName="gender"
+                        [options]="genders"
+                        optionValue="value"
+                        optionLabel="title"
+                    ></p-dropdown>
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm text-gray-500 font-medium" htmlFor="birthday">Birthday</label>
-                    <p-calendar placeholder="Birthday" appendTo="body" id="birthday"
-                        formControlName="birthday"></p-calendar>
+                    <label
+                        class="text-sm text-gray-500 font-medium"
+                        htmlFor="birthday"
+                        >Birthday</label
+                    >
+                    <p-calendar
+                        placeholder="Birthday"
+                        appendTo="body"
+                        id="birthday"
+                        formControlName="birthday"
+                    ></p-calendar>
                 </div>
             </div>
         </div>
         <!-- Communications -->
-        <div [ngClass]="{'p-0': isDialog, 'px-4 py-6': !isDialog}" class="flex-1 bg-light rounded-md border-1">
+        <div
+            [ngClass]="{ 'p-0': isDialog, 'px-4 py-6': !isDialog }"
+            class="flex-1 bg-light rounded-md border-1"
+        >
             <h3 class="text-lg mb-2 font-medium">Contact Information</h3>
             <div class="flex-1 flex flex-col gap-4">
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm text-gray-500 font-medium" htmlFor="email">Email</label>
-                    <input placeholder="Email" pInputText id="email" formControlName="email" />
+                    <label
+                        class="text-sm text-gray-500 font-medium"
+                        htmlFor="email"
+                        >Email</label
+                    >
+                    <input
+                        placeholder="Email"
+                        pInputText
+                        id="email"
+                        formControlName="email"
+                    />
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm text-gray-500 font-medium" htmlFor="phone">Phone Number</label>
-                    <input placeholder="Number phone" pInputText id="phone" formControlName="phone" />
+                    <label
+                        class="text-sm text-gray-500 font-medium"
+                        htmlFor="phone"
+                        >Phone Number</label
+                    >
+                    <input
+                        placeholder="Number phone"
+                        pInputText
+                        id="phone"
+                        formControlName="phone"
+                    />
                 </div>
             </div>
         </div>
@@ -48,63 +107,110 @@
     <ng-container [ngTemplateOutlet]="divider"></ng-container>
     <!-- Management -->
 
-
-
-    <div class="flex-1 bg-light" [ngClass]="{'p-0': isDialog, 'px-4 py-6': !isDialog}">
+    <div
+        class="flex-1 bg-light"
+        [ngClass]="{ 'p-0': isDialog, 'px-4 py-6': !isDialog }"
+    >
         <h3 class="text-lg mb-2 font-medium">Manager Information</h3>
         <div class="flex-1 flex flex-col gap-4">
             <div class="flex flex-col gap-2">
-                <label class="text-sm text-gray-500 font-medium" htmlFor="mentor">Mentor</label>
-                <p-dropdown placeholder="Mentor" id="mentor" formControlName="mentor" [options]="mentorList"
-                    optionValue="id" optionLabel="name"></p-dropdown>
+                <label
+                    class="text-sm text-gray-500 font-medium"
+                    htmlFor="mentor"
+                    >Mentor</label
+                >
+                <p-dropdown
+                    placeholder="Mentor"
+                    id="mentor"
+                    formControlName="mentor"
+                    [options]="mentorList"
+                    optionValue="id"
+                    optionLabel="name"
+                ></p-dropdown>
             </div>
 
             <div class="flex flex-col gap-2">
-                <label class="text-sm text-gray-500 font-medium" htmlFor="team">Team</label>
-                <p-dropdown placeholder="Team" formControlName="team" [options]="teamList" optionValue="id"
-                    optionLabel="name"></p-dropdown>
+                <label class="text-sm text-gray-500 font-medium" htmlFor="team"
+                    >Team</label
+                >
+                <p-dropdown
+                    placeholder="Team"
+                    formControlName="team"
+                    [options]="teamList"
+                    optionValue="id"
+                    optionLabel="name"
+                ></p-dropdown>
             </div>
 
             <div class="flex flex-col gap-2">
-                <label class="text-sm text-gray-500 font-medium" htmlFor="status">Status</label>
-                <p-dropdown placeholder="Status" formControlName="status" [options]="status" optionValue="value"
-                    optionLabel="title"></p-dropdown>
+                <label
+                    class="text-sm text-gray-500 font-medium"
+                    htmlFor="status"
+                    >Status</label
+                >
+                <p-dropdown
+                    placeholder="Status"
+                    formControlName="status"
+                    [options]="status"
+                    optionValue="value"
+                    optionLabel="title"
+                ></p-dropdown>
             </div>
         </div>
     </div>
 
-
-
-
     <ng-container [ngTemplateOutlet]="divider"></ng-container>
-    <div [ngClass]="{'p-0': isDialog, 'px-4 py-6': !isDialog}" class="flex-1 bg-light rounded-md border-1">
+    <div
+        [ngClass]="{ 'p-0': isDialog, 'px-4 py-6': !isDialog }"
+        class="flex-1 bg-light rounded-md border-1"
+    >
         <h3 class="text-lg mb-2 font-medium">Other Information</h3>
         <div class="flex flex-col gap-4">
             <div class="flex flex-col">
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm text-gray-500 font-medium" htmlFor="technology">Technology</label>
-                    <input placeholder="Technology" pInputText id="technology" formControlName="technology" />
+                    <label
+                        class="text-sm text-gray-500 font-medium"
+                        htmlFor="technology"
+                        >Technology</label
+                    >
+                    <input
+                        placeholder="Technology"
+                        pInputText
+                        id="technology"
+                        formControlName="technology"
+                    />
                 </div>
             </div>
             <div class="flex flex-col">
                 <div class="flex flex-col gap-2">
-                    <label class="text-sm text-gray-500 font-medium" htmlFor="description">Description</label>
-                    <p-editor placeholder="Description" formControlName="description" id="description"
-                        [style]="{ height: '200px' }"></p-editor>
+                    <label
+                        class="text-sm text-gray-500 font-medium"
+                        htmlFor="description"
+                        >Description</label
+                    >
+                    <p-editor
+                        placeholder="Description"
+                        formControlName="description"
+                        id="description"
+                        [style]="{ height: '300px' }"
+                    ></p-editor>
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="w-full flex justify-end mt-4">
-        <p-button [loading]="isLoading" type="submit" label="Submit" [disabled]="!internForm.valid"></p-button>
+        <p-button
+            [loading]="isLoading"
+            type="submit"
+            label="Submit"
+            [disabled]="!internForm.valid"
+        ></p-button>
     </div>
 </form>
 
-
 <ng-template #divider>
-    <div [class]="{'mt-8': isDialog}">
+    <div [class]="{ 'mt-8': isDialog }">
         <p-divider></p-divider>
     </div>
 </ng-template>

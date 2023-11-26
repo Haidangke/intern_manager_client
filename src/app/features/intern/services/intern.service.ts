@@ -14,25 +14,24 @@ export class InternService {
         pagination: PageInfo = {
             size: 10,
             page: 0,
-        }
+        },
+        mentorId?: string
     ) {
-        return this.http.get<ResponsePagination<InternDetail>>(
-            'http://localhost:8080/api/v1/interns',
-            {
-                params: { ...pagination },
-            }
-        );
+        const params = { ...pagination, mentor: mentorId ?? '' };
+        return this.http.get<ResponsePagination<InternDetail>>('interns', {
+            params: { ...params },
+        });
     }
 
     getInternListByMentor(
+        mentorId: string,
         pagination: PageInfo = {
             size: 10,
             page: 0,
-        },
-        mentorId: string
+        }
     ) {
         return this.http.get<ResponsePagination<InternDetail>>(
-            'http://localhost:8080/api/v1/interns/mentor/' + mentorId,
+            'interns/mentor/' + mentorId,
             {
                 params: { ...pagination },
             }
@@ -40,14 +39,29 @@ export class InternService {
     }
 
     getInternListByTeam(
+        teamId: string,
         pagination: PageInfo = {
             size: 10,
             page: 0,
-        },
-        teamId: string
+        }
     ) {
         return this.http.get<ResponsePagination<InternDetail>>(
-            'http://localhost:8080/api/v1/interns/team/' + teamId,
+            'interns/team/' + teamId,
+            {
+                params: { ...pagination },
+            }
+        );
+    }
+
+    getInternListNotInProject(
+        projectId: string,
+        pagination: PageInfo = {
+            size: 10,
+            page: 0,
+        }
+    ) {
+        return this.http.get<ResponsePagination<InternDetail>>(
+            `interns/project/not/${projectId}`,
             {
                 params: { ...pagination },
             }
@@ -55,26 +69,18 @@ export class InternService {
     }
 
     getInternById(id: string) {
-        return this.http.get<InternDetail>(
-            'http://localhost:8080/api/v1/interns/' + id
-        );
+        return this.http.get<InternDetail>(`interns/${id}`);
     }
 
     createIntern(data: InternParams) {
-        return this.http.post<InternDetail>(
-            'http://localhost:8080/api/v1/interns',
-            data
-        );
+        return this.http.post<InternDetail>('interns', data);
     }
 
     updateIntern(id: string, data: InternParams) {
-        return this.http.put<InternDetail>(
-            'http://localhost:8080/api/v1/interns/' + id,
-            data
-        );
+        return this.http.put<InternDetail>(`interns/${id}`, data);
     }
 
     deleteIntern(id: string) {
-        return this.http.delete('http://localhost:8080/api/v1/interns/' + id);
+        return this.http.delete(`interns/${id}`);
     }
 }

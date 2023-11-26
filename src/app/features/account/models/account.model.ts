@@ -15,8 +15,8 @@ export interface AccountParams {
     password: string;
     role: Role;
 
-    intern?: Intern;
-    mentor?: Mentor;
+    intern?: string;
+    mentor?: string;
 }
 
 export interface AccountDetail extends Account {

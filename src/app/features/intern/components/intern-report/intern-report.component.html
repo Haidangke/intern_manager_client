@@ -1,3 +1,61 @@
 <div class="pt-8 px-8 pb-10 bg-light shadow">
-    <full-calendar [events]="events" #calendar *ngIf="calendarOptions" [options]="calendarOptions"></full-calendar>
+    <div class="flex justify-between items-center -mt-2 mb-8">
+        <h2 class="text-lg font-semibold">Intern Task</h2>
+        <button class="!w-fit" pButton (click)="isDialog = true">
+            Add task
+        </button>
+    </div>
+    <full-calendar
+        [events]="events"
+        #calendar
+        *ngIf="calendarOptions"
+        [options]="calendarOptions"
+        
+    ></full-calendar>
 </div>
+
+<p-dialog header="Add Task" [style]="{ width: '50vw' }" [(visible)]="isDialog">
+    <form #form="ngForm" class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2">
+            <label class="text-sm font-medium" for="">Title</label>
+            <input
+                name="title"
+                placeholder="Title"
+                type="text"
+                pInputText
+                [(ngModel)]="taskForm.title"
+            />
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-sm font-medium" for="">Start date</label>
+            <p-calendar
+                name="start_date"
+                placeholder="MM/DD/YYYY"
+                [(ngModel)]="taskForm.start"
+                appendTo="body"
+            ></p-calendar>
+        </div>
+        <div class="flex flex-col gap-2">
+            <label class="text-sm font-medium" for="">End date</label>
+            <p-calendar
+                name="end_date"
+                placeholder="MM/DD/YYYY"
+                [(ngModel)]="taskForm.end"
+                appendTo="body"
+            ></p-calendar>
+        </div>
+    </form>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-end w-full">
+            <button
+                [disabled]="form.invalid"
+                class="!w-fit"
+                pButton
+                (click)="onAddTask()"
+            >
+                Add task
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>

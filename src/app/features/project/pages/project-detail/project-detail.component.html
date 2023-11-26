@@ -1,0 +1,20 @@
+<ng-container *ngIf="project.data">
+    <app-list-data (onDelete)="handleDeleteInternFromProject($event)" (onAdd)="isDialog = true"
+        [data]="projectInternList.data" [fetching]="projectInternList.fetching" [deleting]="projectInternList.deleting"
+        [cols]="cols" [title]="project.data.name + ' Project'" subTitles="Intern" [pagination]="pagination"
+        [actions]="['delete']" [totalRecords]="projectInternList.totalRecords"></app-list-data>
+</ng-container>
+
+
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<p-dialog [contentStyle]="{'overflow':'visible'}" [resizable]="false" [draggable]="false" header="Add Intern"
+    [(visible)]="isDialog" [style]="{width: '50%'}">
+    <label class="text-sm text-gray-500 font-medium mb-2 block">Intern</label>
+    <p-multiSelect [virtualScroll]="true" [options]="internsNotInProject.data" [(ngModel)]="selectedInterns"
+        placeholder="Select a Intern" optionValue="id" optionLabel="name" display="chip"></p-multiSelect>
+
+    <div class="w-full flex justify-end mt-8">
+        <p-button (onClick)="handleAddInternFromProject()" [loading]="creating" type="submit" label="Submit"
+            [disabled]="selectedInterns.length === 0"></p-button>
+    </div>
+</p-dialog>

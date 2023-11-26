@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { TeamListComponent, TeamDetailComponent } from './pages';
 import { TeamRoutingModule } from './team-routing.module';
 import { SharedModule } from '@shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -26,6 +26,7 @@ import { RouterModule } from '@angular/router';
         InputTextModule,
         DropdownModule,
         RouterModule,
+        FormsModule
     ],
 })
 export class TeamModule {}

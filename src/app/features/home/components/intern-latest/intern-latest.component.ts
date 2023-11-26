@@ -1,21 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { InternDetail } from '@features/intern/models/intern.model';
 import { ColListData } from '@shared/components/list-data/list-data.model';
-import { interns } from 'app/features/intern/intern.data';
 
 @Component({
     selector: 'app-intern-latest',
     templateUrl: './intern-latest.component.html',
 })
 export class InternLatestComponent {
-    interns: any[] = interns;
+    @Input() interns: InternDetail[] = [];
     isLoading = false;
     isDeleting = false;
     isCaption = false;
+    ngOnInit() {
+        this.interns = [...this.interns].splice(0, 3);
+    }
     cols: ColListData[] = [
-        {
-            field: 'id',
-            header: '#',
-        },
         {
             field: 'name',
             type: 'link',

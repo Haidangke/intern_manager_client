@@ -4,6 +4,7 @@ import { MentorDetail } from '../../models/mentor.model';
 import { MentorService } from '../../services/mentor.service';
 import { GENDER_DROPDOWN } from '@shared/constants';
 import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
 @Component({
     selector: 'app-mentor-form',
     templateUrl: './mentor-form.component.html',
@@ -13,12 +14,13 @@ export class MentorFormComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private mentorService: MentorService,
-        private toastService: ToastrService
+        private messageService: MessageService
     ) {}
     mentorForm!: FormGroup;
     isLoading = false;
 
     @Input() mentor?: MentorDetail;
+    @Output() mentorChange = new EventEmitter<MentorDetail>();
     @Input() isDialog = false;
     @Output() onSubmitSuccess = new EventEmitter();
 
@@ -76,15 +78,29 @@ export class MentorFormComponent implements OnInit {
                     ...this.mentorForm.value,
                 })
                 .subscribe({
-                    next: () => {
-                        this.toastService.success('Update mentor successfully');
+                    next: (res) => {
+                        this.messageService.add({
+                            severity: 'success',
+                            detail: 'Update mentor successfully',
+                        });
                         this.onSubmitSuccess.emit();
 
                         this.handleSubmitting(false);
+                        this.mentorForm.setValue({
+                            name: res.name,
+                            gender: res.gender,
+                            birthday: new Date(res.birthday),
+                            address: res.address,
+                            phone: res.phone,
+                            email: res.email,
+                        });
+                        this.mentorChange.emit(res);
                     },
                     error: () => {
-                        this.toastService.error('Update mentor failure');
-
+                        this.messageService.add({
+                            severity: 'error',
+                            detail: 'Update mentor failure',
+                        });
                         this.handleSubmitting(false);
                     },
                 });
@@ -93,11 +109,17 @@ export class MentorFormComponent implements OnInit {
                 next: () => {
                     this.mentorForm.reset();
                     this.onSubmitSuccess.emit();
-                    this.toastService.success('Create mentor successfully');
+                    this.messageService.add({
+                        severity: 'success',
+                        detail: 'Create mentor successfully',
+                    });
                     this.handleSubmitting(false);
                 },
                 error: () => {
-                    this.toastService.error('Update mentor failure');
+                    this.messageService.add({
+                        severity: 'error',
+                        detail: 'Create mentor failure',
+                    });
                     this.handleSubmitting(false);
                 },
             });

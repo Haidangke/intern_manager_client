@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ColListData } from './list-data.model';
 import { PageInfo } from '@shared/model/common';
+import { Table } from 'primeng/table';
 
 @Component({
     selector: 'app-list-data',
@@ -11,6 +12,7 @@ export class ListDataComponent implements OnInit {
     @Input() data!: any[];
     @Input() cols!: ColListData[];
     @Input() title: string = '';
+    @Input() subTitles: string = '';
     @Input() fetching!: boolean;
 
     @Input() actions: ('update' | 'delete')[] = [];
@@ -19,17 +21,17 @@ export class ListDataComponent implements OnInit {
     @Input() isCaption = true;
     @Input() totalRecords = 0;
 
+    @ViewChild('dt1') dt1!: Table;
+
     recordsColSpan!: number;
+    rows = 10;
+    first = 0;
 
     @Output() onAdd = new EventEmitter();
     @Output() onDelete = new EventEmitter<any>();
     @Output() onUpdate = new EventEmitter<any>();
     @Output() onPageChange = new EventEmitter<number>();
     @Output() onSizeChange = new EventEmitter<number>();
-    @Output() onSearch = new EventEmitter<any>();
-
-    rows = 10;
-    first = 0;
 
     ngOnInit(): void {
         this.recordsColSpan = this.cols.length + 1;
@@ -45,7 +47,8 @@ export class ListDataComponent implements OnInit {
         this.onPageChange.emit(event);
     }
 
-    handleTogglePassword(e: any) {
-        console.log(e)
+    search(event: any) {
+        this.dt1.filterGlobal(event.target?.value, 'contains')
     }
+
 }

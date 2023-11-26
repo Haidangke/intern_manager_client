@@ -21,10 +21,16 @@
         </div>
 
         <!-- Linked User -->
-        <div *ngIf="isLinkedUser" class="flex flex-col gap-2 col-start-1 col-end-2">
+        <div *ngIf="accountForm.get('role')?.value == 'ROLE_INTERN'" class="flex flex-col gap-2 col-start-1 col-end-2">
             <label class="text-sm text-gray-500 font-medium" htmlFor="linked_user">Linked User</label>
-            <p-dropdown appendTo="body" placeholder="Role" optionLabel="title" optionValue="value"
-                formControlName="role" [options]="roles">
+            <p-dropdown appendTo="body" placeholder="User" optionLabel="name" optionValue="id"
+                formControlName="linked_user" [options]="internList">
+            </p-dropdown>
+        </div>
+        <div *ngIf="accountForm.get('role')?.value == 'ROLE_MENTOR'" class="flex flex-col gap-2 col-start-1 col-end-2">
+            <label class="text-sm text-gray-500 font-medium" htmlFor="linked_user">Linked User</label>
+            <p-dropdown appendTo="body" placeholder="User" optionLabel="name" optionValue="id"
+                formControlName="linked_user" [options]="mentorList">
             </p-dropdown>
         </div>
     </div>
@@ -32,3 +38,5 @@
         <p-button type="submit" label="Submit" [disabled]="!accountForm.valid"></p-button>
     </div>
 </form>
+
+
